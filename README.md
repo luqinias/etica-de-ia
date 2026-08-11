@@ -42,16 +42,6 @@ original, compilando sem erros.
 | 6 | Equidade: a IA deve ser justa? | Conceitos, Aplicações e Riscos | 15 |
 | 7 | Ética na prática: como a ética da IA pode evoluir? | Riscos e Aplicações | 9 |
 
-### O que ainda falta antes da entrega
-
-**Revisão humana.** Percorrer a lista de verificação ao final de `PROMPTS.md`,
-capítulo a capítulo, comparando cada `capituloNN.md` com o
-`origem-en-capituloNN.md` da mesma pasta. Isso não é opcional: a tradução foi
-feita com apoio de IA e precisa de conferência antes de ir ao ar.
-
-Autoria, matrículas, orientação e licença já estão preenchidos em todos os
-arquivos.
-
 ## Estrutura
 
 ```
