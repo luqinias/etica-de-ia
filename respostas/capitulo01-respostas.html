@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Programa CiberExt 26-29 · FEELT38103 · uso do docente" />
+  <meta name="dcterms.date" content="2026-01-01" />
+  <title>Ética da Inteligência Artificial</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">
+:root {
+
+--papel: #FBF8F3;
+--papel-alt: #F3EEE4;
+--tinta: #1F2933;
+--tinta-fraca: #5C6670;
+
+--conceitos: #24505C; 
+--aplicacoes: #16746C; 
+--riscos: #B45F14; 
+
+--ameixa: #77345F;
+--regra: #E4DBCD;
+--bloco: #F3EEE4;
+--nota: #EAF1F0;
+--caso: #FCF3E6;
+--filosofia:#F7EFF4;
+
+--serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia,
+"Times New Roman", serif;
+--sans: Optima, Candara, "Gill Sans", "Gill Sans MT", "Segoe UI", Avenir,
+"Trebuchet MS", sans-serif;
+--mono: "SFMono-Regular", "DejaVu Sans Mono", "Liberation Mono", Consolas,
+monospace;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+font-family: var(--serif);
+color: var(--tinta);
+background: var(--papel);
+line-height: 1.7;
+font-size: 18px;
+max-width: 780px;
+margin: 0 auto;
+padding: 0 26px 96px;
+hyphens: auto;
+}
+
+header#title-block-header {
+margin: 0 -26px 3rem;
+padding: 3.4rem 26px 2.2rem;
+background: var(--papel-alt);
+border-bottom: 1px solid var(--regra);
+position: relative;
+}
+header#title-block-header::before {
+content: "";
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 6px;
+background: linear-gradient(
+to right,
+var(--conceitos) 0%, var(--conceitos) 33.3%,
+var(--aplicacoes) 33.3%, var(--aplicacoes) 66.6%,
+var(--riscos) 66.6%, var(--riscos) 100%
+);
+}
+header#title-block-header .title {
+font-family: var(--sans);
+font-size: 2.15rem;
+font-weight: 600;
+line-height: 1.18;
+letter-spacing: -0.015em;
+color: var(--conceitos);
+margin: 0 0 0.5rem;
+}
+header#title-block-header .subtitle {
+font-family: var(--sans);
+font-size: 1.12rem;
+font-weight: 400;
+color: var(--tinta-fraca);
+margin: 0 0 1.4rem;
+}
+header#title-block-header .author,
+header#title-block-header .date {
+font-family: var(--sans);
+font-size: 0.82rem;
+color: var(--tinta-fraca);
+margin: 0.15rem 0;
+line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--sans);
+font-weight: 600;
+line-height: 1.25;
+letter-spacing: -0.01em;
+}
+h1 {
+font-size: 1.95rem;
+color: var(--conceitos);
+margin: 3rem 0 1.2rem;
+}
+h2 {
+font-size: 1.45rem;
+color: var(--conceitos);
+margin: 2.6rem 0 0.9rem;
+padding-bottom: 0.4rem;
+border-bottom: 1.5px solid var(--regra);
+}
+h3 {
+font-size: 1.16rem;
+color: var(--aplicacoes);
+margin: 2rem 0 0.7rem;
+}
+h4 {
+font-size: 1rem;
+color: var(--riscos);
+margin: 1.6rem 0 0.5rem;
+text-transform: uppercase;
+letter-spacing: 0.07em;
+font-size: 0.86rem;
+}
+
+p { margin: 0 0 1.15rem; }
+a {
+color: var(--ameixa);
+text-decoration: none;
+border-bottom: 1px solid rgba(119, 52, 95, 0.32);
+transition: border-color 0.15s ease, background 0.15s ease;
+}
+a:hover { border-bottom-color: var(--ameixa); background: rgba(119, 52, 95, 0.06); }
+a:focus-visible { outline: 2px solid var(--riscos); outline-offset: 2px; }
+
+a[href^="http"] {
+color: var(--riscos);
+border-bottom-color: rgba(180, 95, 20, 0.32);
+}
+a[href^="http"]:hover { border-bottom-color: var(--riscos); background: rgba(180, 95, 20, 0.07); }
+strong { font-weight: 700; color: var(--conceitos); }
+em { font-style: italic; }
+hr {
+border: 0;
+height: 1px;
+background: var(--regra);
+margin: 2.6rem 0;
+}
+
+ul, ol { margin: 0 0 1.2rem; padding-left: 1.35rem; }
+li { margin: 0.3rem 0; }
+li > ul, li > ol { margin: 0.3rem 0; }
+ul li::marker { color: var(--riscos); }
+ol li::marker { color: var(--aplicacoes); font-family: var(--sans); font-weight: 600; }
+
+blockquote {
+margin: 1.6rem 0;
+padding: 1.1rem 1.3rem;
+background: var(--caso);
+border-left: 3px solid var(--riscos);
+border-radius: 0 4px 4px 0;
+font-size: 0.97rem;
+}
+blockquote p:last-child { margin-bottom: 0; }
+blockquote cite {
+display: block;
+margin-top: 0.7rem;
+font-family: var(--sans);
+font-size: 0.8rem;
+font-style: normal;
+color: var(--tinta-fraca);
+}
+
+div.nota, div.caso, div.reflexao,
+div.filosofia, div.tecnica, div.contexto, div.definicao {
+margin: 1.7rem 0;
+padding: 1.15rem 1.35rem;
+border-radius: 5px;
+font-size: 0.97rem;
+}
+
+div.filosofia { background: var(--filosofia); border-left: 3px solid var(--ameixa); }
+div.tecnica { background: var(--nota); border-left: 3px solid var(--conceitos); }
+div.contexto { background: var(--papel-alt); border-left: 3px solid var(--aplicacoes); }
+div.definicao { background: var(--caso); border-left: 3px solid var(--riscos); }
+div.nota { background: var(--nota); border-left: 3px solid var(--conceitos); }
+div.caso { background: var(--caso); border-left: 3px solid var(--riscos); }
+div.reflexao { background: var(--papel-alt); border-left: 3px solid var(--aplicacoes); }
+
+div.nota::before, div.caso::before, div.reflexao::before,
+div.filosofia::before, div.tecnica::before,
+div.contexto::before, div.definicao::before {
+display: block;
+font-family: var(--sans);
+font-size: 0.72rem;
+font-weight: 700;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+margin-bottom: 0.55rem;
+}
+div.filosofia::before { content: "Conceito filosófico"; color: var(--ameixa); }
+div.tecnica::before { content: "Nota técnica"; color: var(--conceitos); }
+div.contexto::before { content: "Contexto"; color: var(--aplicacoes); }
+div.definicao::before { content: "Definição"; color: var(--riscos); }
+div.nota::before { content: "Nota"; color: var(--conceitos); }
+div.caso::before { content: "Caso"; color: var(--riscos); }
+div.reflexao::before { content: "Para pensar"; color: var(--aplicacoes); }
+div.filosofia[data-titulo]::before { content: attr(data-titulo); }
+div.tecnica[data-titulo]::before { content: attr(data-titulo); }
+div.contexto[data-titulo]::before { content: attr(data-titulo); }
+div.definicao[data-titulo]::before { content: attr(data-titulo); }
+div.nota[data-titulo]::before { content: attr(data-titulo); }
+div.caso[data-titulo]::before { content: attr(data-titulo); }
+div.reflexao[data-titulo]::before { content: attr(data-titulo); }
+div.nota > :last-child, div.caso > :last-child, div.reflexao > :last-child,
+div.filosofia > :last-child, div.tecnica > :last-child,
+div.contexto > :last-child, div.definicao > :last-child { margin-bottom: 0; }
+
+code {
+font-family: var(--mono);
+font-size: 0.87em;
+color: var(--ameixa);
+background: var(--bloco);
+padding: 0.1em 0.32em;
+border-radius: 3px;
+}
+pre {
+background: var(--bloco);
+border-left: 3px solid var(--ameixa);
+border-radius: 0 5px 5px 0;
+padding: 1rem 1.15rem;
+overflow-x: auto;
+margin: 1.5rem 0;
+font-size: 0.86rem;
+line-height: 1.55;
+}
+pre code { background: none; padding: 0; color: var(--tinta); font-size: 1em; }
+
+table {
+width: 100%;
+border-collapse: collapse;
+margin: 1.8rem 0;
+font-size: 0.93rem;
+font-family: var(--sans);
+}
+th {
+text-align: left;
+font-weight: 600;
+color: var(--conceitos);
+border-bottom: 2px solid var(--conceitos);
+padding: 0.55rem 0.7rem;
+}
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--regra); }
+tbody tr:nth-child(even) { background: rgba(243, 238, 228, 0.55); }
+caption {
+caption-side: bottom;
+font-family: var(--sans);
+font-size: 0.8rem;
+color: var(--tinta-fraca);
+padding-top: 0.6rem;
+text-align: left;
+}
+
+img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+figure { margin: 2rem 0; }
+figcaption {
+font-family: var(--sans);
+font-size: 0.82rem;
+color: var(--tinta-fraca);
+text-align: center;
+margin-top: 0.7rem;
+padding: 0 1rem;
+}
+
+nav#TOC {
+background: var(--papel-alt);
+border: 1px solid var(--regra);
+border-radius: 5px;
+padding: 1.3rem 1.6rem;
+margin: 0 0 2.8rem;
+font-family: var(--sans);
+font-size: 0.92rem;
+}
+nav#TOC::before {
+content: "Neste capítulo";
+display: block;
+font-size: 0.72rem;
+font-weight: 700;
+letter-spacing: 0.11em;
+text-transform: uppercase;
+color: var(--tinta-fraca);
+margin-bottom: 0.8rem;
+}
+nav#TOC ul { list-style: none; padding-left: 0; margin: 0; }
+nav#TOC ul ul { padding-left: 1.1rem; }
+nav#TOC li { margin: 0.28rem 0; }
+nav#TOC a { color: var(--conceitos); border-bottom: none; }
+nav#TOC a:hover { border-bottom: 1px solid var(--conceitos); background: none; }
+
+.footnotes {
+margin-top: 3.5rem;
+padding-top: 1.3rem;
+border-top: 1px solid var(--regra);
+font-size: 0.88rem;
+color: var(--tinta-fraca);
+}
+.footnotes hr { display: none; }
+
+div.licenca {
+margin-top: 3.5rem;
+padding-top: 1.4rem;
+border-top: 3px solid var(--regra);
+font-family: var(--sans);
+font-size: 0.79rem;
+line-height: 1.6;
+color: var(--tinta-fraca);
+}
+div.licenca a { color: var(--tinta-fraca); }
+
+@media (max-width: 620px) {
+body { font-size: 17px; padding: 0 18px 64px; }
+header#title-block-header { margin: 0 -18px 2.2rem; padding: 2.6rem 18px 1.8rem; }
+header#title-block-header .title { font-size: 1.7rem; }
+h1 { font-size: 1.55rem; }
+h2 { font-size: 1.28rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+* { transition: none !important; animation: none !important; }
+}
+@media print {
+body { background: #fff; font-size: 11pt; max-width: none; }
+header#title-block-header { background: none; }
+nav#TOC { break-after: page; }
+a { border-bottom: none; }
+a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; }
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Ética da Inteligência Artificial</h1>
+<p class="subtitle">Capítulo 1 — Gabarito e critérios</p>
+<p class="author">Programa CiberExt 26-29 · FEELT38103 · uso do
+docente</p>
+<p class="date">2026</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#capítulo-1-gabarito-e-critérios" id="toc-capítulo-1-gabarito-e-critérios">Capítulo 1 — Gabarito e
+critérios</a>
+<ul>
+<li><a href="#exercícios-1a-e-1b-valores-e-normas" id="toc-exercícios-1a-e-1b-valores-e-normas">Exercícios 1a e 1b —
+Valores e normas</a></li>
+<li><a href="#exercício-2-associação-valores-normas" id="toc-exercício-2-associação-valores-normas">Exercício 2 — Associação
+valores × normas</a></li>
+<li><a href="#exercício-3-tuitando-sobre-questões-éticas" id="toc-exercício-3-tuitando-sobre-questões-éticas">Exercício 3 —
+Tuitando sobre questões éticas</a></li>
+<li><a href="#exercício-3c-ensaio-150-a-300-palavras" id="toc-exercício-3c-ensaio-150-a-300-palavras">Exercício 3c — Ensaio
+(150 a 300 palavras)</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="capítulo-1-gabarito-e-critérios">Capítulo 1 — Gabarito e
+critérios</h1>
+<div class="nota" data-titulo="Material de uso do docente">
+<p>Não publicar junto com o curso. Existe no repositório porque faz
+parte da entrega acadêmica do projeto de extensão.</p>
+</div>
+<h2 id="exercícios-1a-e-1b-valores-e-normas">Exercícios 1a e 1b —
+Valores e normas</h2>
+<p><strong>Não há resposta certa.</strong> São instrumentos de
+autoconhecimento, adaptados da escala de valores de Schwartz (2001).
+Todos os participantes recebem o ponto por responderem.</p>
+<p><strong>O que observar na discussão em fórum:</strong> o interesse
+pedagógico está na diferença entre as duas listas. Valores que a pessoa
+marca como pessoais no 1a com frequência não são os que ela prioriza no
+1b, quando age como formuladora de política pública. Vale pedir que os
+estudantes comparem as próprias respostas — essa dissonância é o ponto
+do exercício e prepara o terreno para a guilhotina de Hume.</p>
+<hr />
+<h2 id="exercício-2-associação-valores-normas">Exercício 2 — Associação
+valores × normas</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Norma</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Proteções adicionais sobre dados de treinamento</td>
+<td>Privacidade</td>
+</tr>
+<tr class="even">
+<td>2. Promover justiça e eliminar discriminação</td>
+<td>Igualdade e não discriminação</td>
+</tr>
+<tr class="odd">
+<td>3. Libertar as pessoas do trabalho rotineiro</td>
+<td>Autorrealização e florescimento humano</td>
+</tr>
+<tr class="even">
+<td>4. Não manipular cidadãos em eleições</td>
+<td>Democracia</td>
+</tr>
+<tr class="odd">
+<td>5. Reduzir a pegada de carbono da IA</td>
+<td>Proteção da natureza</td>
+</tr>
+<tr class="even">
+<td>6. Não prejudicar a liberdade de estabelecer padrões próprios</td>
+<td>Autonomia</td>
+</tr>
+<tr class="odd">
+<td>7. Robustez técnica e proteção contra uso malicioso</td>
+<td>Segurança</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Justificativa geral:</strong> cada norma é a formulação
+prescritiva (“deve-se…”) de um valor subjacente. O exercício treina
+exatamente a distinção valor/norma da seção III do capítulo.</p>
+<p><strong>Confusões esperadas:</strong> os itens 1 e 7 se confundem
+(privacidade × segurança) — a diferença é que o item 1 trata de controle
+sobre os próprios dados, e o 7, de resistência a ataques. Os itens 3 e 6
+também se confundem (autorrealização × autonomia) — o 3 é sobre poder
+desenvolver-se, o 6, sobre não ter o próprio juízo substituído.</p>
+<hr />
+<h2 id="exercício-3-tuitando-sobre-questões-éticas">Exercício 3 —
+Tuitando sobre questões éticas</h2>
+<p><strong>Sem resposta única.</strong> Avaliado por revisão por
+pares.</p>
+<p>Uma resposta adequada deve:</p>
+<ul>
+<li>tomar uma posição explícita sobre o caso, e não apenas
+descrevê-lo;</li>
+<li>reconhecer que o comportamento do modelo reflete padrões
+estatísticos dos dados de treinamento, não uma “opinião” da
+máquina;</li>
+<li>evitar as duas saídas fáceis: “é só um algoritmo, não tem culpa” e
+“a tecnologia é racista/sexista por natureza”.</li>
+</ul>
+<p><strong>Erros comuns:</strong> confundir a explicação técnica (por
+que o modelo faz isso) com a justificação ética (se isso é aceitável) —
+é a guilhotina de Hume em ação; tratar o caso como problema puramente
+técnico, solucionável com mais dados.</p>
+<hr />
+<h2 id="exercício-3c-ensaio-150-a-300-palavras">Exercício 3c — Ensaio
+(150 a 300 palavras)</h2>
+<p>Uma resposta adequada deve identificar ao menos três dos seguintes
+elementos:</p>
+<ul>
+<li><strong>Valores em jogo:</strong> igualdade, dignidade,
+representação justa.</li>
+<li><strong>Normas:</strong> a IA não deve reforçar estereótipos;
+sistemas devem ser testados quanto a viés antes da implantação.</li>
+<li><strong>Princípios:</strong> equidade e não discriminação (cap. 6),
+transparência (cap. 4), responsabilização (cap. 3).</li>
+<li><strong>A distinção fato/valor:</strong> o fato de os dados serem
+enviesados não determina, sozinho, que seja errado — é preciso um
+argumento normativo adicional.</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Critério</th>
+<th>Insuficiente</th>
+<th>Adequado</th>
+<th>Excelente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Identifica valores e normas</td>
+<td>não distingue os dois</td>
+<td>distingue e nomeia</td>
+<td>articula a relação entre eles</td>
+</tr>
+<tr class="even">
+<td>Julga a importância</td>
+<td>apenas descreve</td>
+<td>julga com justificativa</td>
+<td>pondera argumentos contrários</td>
+</tr>
+<tr class="odd">
+<td>Usa conceitos do capítulo</td>
+<td>ausentes</td>
+<td>presentes</td>
+<td>aplicados com precisão</td>
+</tr>
+<tr class="even">
+<td>Extensão e clareza</td>
+<td>fora do limite</td>
+<td>dentro do limite</td>
+<td>bem estruturado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="licenca">
+<p>Gabarito elaborado a partir de <em>Ethics of AI</em>, Universidade de
+Helsinque. Tradução e adaptação: José Lucas Lira Bizil, Fernando Mazzeto
+Lisboa Lima e Matheus da Silva Fernandes, Programa CiberExt 26-29
+(FEELT38103), UFU, 2026. Licença CC BY-NC-SA 4.0.</p>
+</div>
+</body>
+</html>

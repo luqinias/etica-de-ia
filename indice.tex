@@ -1,0 +1,438 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage[]{charter}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% ==========================================================================
+%  IA na Sociedade — cabeçalho LaTeX (pdflatex)
+%  Programa CiberExt 26-29 · FEELT38103
+%  Adaptado de "AI in Society" (Universidade de Helsinque / Una Europa)
+%  Licença: CC BY-NC-SA 4.0
+% --------------------------------------------------------------------------
+%  Espelha a identidade do ia-style.css: papel quente, tinta ardósia e a
+%  faixa tricolor dos três eixos do curso (conceitos / aplicações / riscos).
+% ==========================================================================
+
+% ---------- Fontes ----------
+% A serifada vem do build.sh, que passa  -V fontfamily=charter  ao pandoc.
+% Aqui só acrescentamos a sem-serifa; ambas com fallback, porque nem toda
+% instalação de LaTeX traz os mesmos pacotes.
+\IfFileExists{helvet.sty}{\usepackage[scaled=0.90]{helvet}}{}
+\usepackage{textcomp}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+% ---------- Pacotes de layout ----------
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{fvextra}
+\usepackage{newunicodechar}
+
+% ---------- Caracteres Unicode que o pdflatex não conhece ----------
+\newunicodechar{✓}{{\color{iaAplic}\checkmark}}
+\newunicodechar{✅}{{\color{iaAplic}\checkmark}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\newunicodechar{€}{\texteuro}
+\newunicodechar{£}{\textsterling}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{•}{\textbullet}
+\newunicodechar{″}{''}
+\newunicodechar{′}{'}
+
+% ==========================================================================
+%  PALETA — os mesmos valores do ia-style.css
+% ==========================================================================
+\definecolor{iaConceitos}{HTML}{24505C}   % petróleo — títulos, eixo 1
+\definecolor{iaAplic}{HTML}{16746C}       % verdete  — subtítulos, eixo 2
+\definecolor{iaRiscos}{HTML}{B45F14}      % açafrão  — destaques, eixo 3
+\definecolor{iaAmeixa}{HTML}{77345F}      % links internos, termos técnicos
+\definecolor{iaTinta}{HTML}{1F2933}       % corpo do texto
+\definecolor{iaTintaFraca}{HTML}{5C6670}
+\definecolor{iaRegra}{HTML}{E4DBCD}
+\definecolor{iaBloco}{HTML}{F3EEE4}
+\definecolor{iaNota}{HTML}{EAF1F0}
+\definecolor{iaCaso}{HTML}{FCF3E6}
+\definecolor{iaFilos}{HTML}{F7EFF4}
+
+\color{iaTinta}
+
+% ==========================================================================
+%  ASSINATURA — faixa tricolor dos três eixos
+% ==========================================================================
+\newcommand{\faixaEixos}[1][\linewidth]{%
+  \noindent
+  \textcolor{iaConceitos}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaAplic}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaRiscos}{\rule{0.3333#1}{4pt}}%
+  \par}
+
+% ---------- Página de título ----------
+\makeatletter
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\providecommand{\@subtitle}{}
+\def\@maketitle{%
+  \newpage\null\vskip 1.5em%
+  \faixaEixos
+  \vskip 2.2em
+  {\raggedright
+    {\sffamily\bfseries\huge\color{iaConceitos}\@title\par}%
+    \vskip 0.7em%
+    {\sffamily\large\color{iaTintaFraca}\@subtitle\par}%
+    \vskip 2em%
+    {\color{iaRegra}\rule{\linewidth}{1pt}}%
+    \vskip 1em%
+    {\sffamily\small\color{iaTinta}\@author\par}%
+    \vskip 0.5em%
+    {\sffamily\footnotesize\color{iaTintaFraca}\@date\par}%
+  }\par\vskip 2.5em}
+\makeatother
+
+% ==========================================================================
+%  TÍTULOS DE SEÇÃO
+% ==========================================================================
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{iaConceitos}}
+  {\thesection}{0.7em}{}
+  [{\vspace{2pt}\color{iaRegra}\titlerule[1.2pt]}]
+\titleformat{\subsection}
+  {\sffamily\large\bfseries\color{iaAplic}}
+  {\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\sffamily\normalsize\bfseries\color{iaRiscos}}
+  {\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}[runin]
+  {\sffamily\small\bfseries\color{iaRiscos}}
+  {}{0em}{}
+
+\titlespacing*{\section}{0pt}{2.6ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.2ex plus 1ex minus .2ex}{1ex plus .2ex}
+
+% ==========================================================================
+%  CABEÇALHO E RODAPÉ
+% ==========================================================================
+\setlength{\headheight}{24pt}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\sffamily\footnotesize\color{iaAplic}Ética da IA}
+\fancyhead[R]{\sffamily\footnotesize\color{iaAplic}\nouppercase{\leftmark}}
+\fancyfoot[C]{\sffamily\footnotesize\color{iaConceitos}\thepage}
+\renewcommand{\headrule}{%
+  \hbox to\headwidth{\color{iaRegra}\leaders\hrule height \headrulewidth\hfill}}
+
+% ==========================================================================
+%  TEXTO CORRIDO
+% ==========================================================================
+\linespread{1.08}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+\emergencystretch=3em
+\hbadness=10000
+
+% ---------- Termos técnicos / código inline ----------
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\color{iaAmeixa}\small\ttfamily #1}}
+
+% ---------- Blocos verbatim ----------
+\fvset{breaklines=true,breakanywhere=true,fontsize=\small}
+
+% ---------- Blocos de código (ambiente Shaded do pandoc) ----------
+\renewenvironment{Shaded}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaBloco,
+      borderline west={3pt}{0pt}{iaAmeixa},
+      left=10pt, right=8pt, top=6pt, bottom=6pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ---------- Citações: caixa de caso ----------
+\renewenvironment{quote}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaCaso,
+      borderline west={3pt}{0pt}{iaRiscos},
+      left=12pt, right=10pt, top=9pt, bottom=9pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ==========================================================================
+%  BLOCOS DE APOIO
+%  No markdown, escreva:   ::: nota   ...texto...   :::
+%  O pandoc converte fenced_divs para os ambientes abaixo.
+% ==========================================================================
+\newtcolorbox{iabox}[3]{
+  breakable, enhanced jigsaw, rounded corners,
+  arc=3pt, boxrule=0pt, frame hidden,
+  colback=#2,
+  borderline west={3pt}{0pt}{#1},
+  left=12pt, right=10pt, top=9pt, bottom=9pt,
+  before skip=11pt, after skip=11pt,
+  before upper={\setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}},
+  title={\sffamily\bfseries\footnotesize\textcolor{#1}{\MakeUppercase{#3}}},
+  attach title to upper={\par\vspace{5pt}},
+  fonttitle=\normalfont}
+
+% Cada ambiente aceita um titulo opcional entre colchetes, vindo do
+% atributo data-titulo do markdown:   \begin{filosofia}[Titulo] ... \end{filosofia}
+% Os quatro primeiros espelham os icones do material original.
+\newenvironment{filosofia}[1][Conceito filosofico]{\begin{iabox}{iaAmeixa}{iaFilos}{#1}}{\end{iabox}}
+\newenvironment{tecnica}[1][Nota tecnica]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{contexto}[1][Contexto]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{definicao}[1][Definicao]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+
+\newenvironment{nota}[1][Nota]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{caso}[1][Caso]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+\newenvironment{reflexao}[1][Para pensar]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{licenca}
+  {\par\vspace{2em}\faixaEixos\par\vspace{0.8em}
+   \begingroup\sffamily\scriptsize\color{iaTintaFraca}}
+  {\endgroup\par}
+
+% ==========================================================================
+%  LISTAS
+% ==========================================================================
+\setlist[itemize]{leftmargin=1.4em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=1.7em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\renewcommand{\labelitemi}{\textcolor{iaRiscos}{\textbullet}}
+\renewcommand{\labelitemii}{\textcolor{iaAplic}{--}}
+
+% ==========================================================================
+%  TABELAS
+% ==========================================================================
+\renewcommand{\arraystretch}{1.3}
+\arrayrulecolor{iaRegra}
+
+% ==========================================================================
+%  RÓTULOS EM PORTUGUÊS
+%  Definidos aqui (e não via -V na linha de comando) porque acentos passados
+%  como argumento dependem do locale do terminal e podem se corromper.
+% ==========================================================================
+\renewcommand{\contentsname}{Sumário}
+\renewcommand{\refname}{Referências}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabela}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Ética da Inteligência Artificial},
+  colorlinks=true,
+  linkcolor={iaAmeixa},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={iaRiscos},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Ética da Inteligência Artificial}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Índice do curso}
+\author{Tradução e adaptação para o português: José Lucas Lira Bizil,
+Fernando Mazzeto Lisboa Lima e Matheus da Silva Fernandes\\
+Programa CiberExt 26-29 · FEELT38103 · Universidade Federal de
+Uberlândia\\
+Original: \emph{Ethics of AI}, Universidade de Helsinque}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=iaConceitos}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{uxe9tica-da-inteliguxeancia-artificial}{%
+\section{Ética da Inteligência
+Artificial}\label{uxe9tica-da-inteliguxeancia-artificial}}
+
+Versão em português brasileiro do curso \emph{Ethics of AI}, da
+Universidade de Helsinque.
+
+\begin{nota}[Sobre o curso]
+
+Este curso examina as questões éticas levantadas pela inteligência
+artificial contemporânea, seus fundamentos filosóficos e sua
+interpretação em termos da computação e de outras ciências. O objetivo é
+desenvolver habilidades de pensamento ético.
+
+Não é exigido conhecimento prévio de IA ou de computação. O curso é útil
+a estudantes de qualquer área e a qualquer pessoa interessada no impacto
+social da IA.
+
+\end{nota}
+
+\hypertarget{os-capuxedtulos}{%
+\subsection{Os capítulos}\label{os-capuxedtulos}}
+
+\textbf{1. O que é ética da IA?} Ética, valores e normas. A guilhotina
+de Hume. Os cinco princípios que organizam o restante do curso.
+
+\textbf{2. Não-maleficência: o que devemos fazer?} Beneficência e
+não-maleficência. O bem comum. Utilitarismo e seus quatro problemas. O
+monstro de utilidade de Nozick. Teorias do bem-estar.
+
+\textbf{3. Responsabilização: quem deve ser responsabilizado?} Agência
+moral, ações e omissões, autonomia. Kant. A dificuldade de
+individualizar responsabilidades em sistemas distribuídos.
+
+\textbf{4. Transparência: devemos saber como a IA funciona?} Por que a
+transparência importa. O que faz de um sistema uma caixa-preta.
+Compreensibilidade e letramento algorítmico. Os riscos da abertura.
+
+\textbf{5. Direitos humanos: a IA deve respeitá-los e promovê-los?}
+Privacidade, segurança e inclusão. O RGPD e a anonimização. Vigilância e
+efeitos inibidores. A divisão de gênero. Direitos das crianças.
+
+\textbf{6. Equidade: a IA deve ser justa e não discriminatória?}
+Igualdade e equidade. O que é discriminação. Danos alocativos e
+representacionais. As três origens do viés. Por que justo não é o mesmo
+que ético.
+
+\textbf{7. Ética na prática: como a ética da IA pode evoluir?} Os
+limites das diretrizes. \emph{Ethics-washing}. Diretrizes como textos
+performativos. A terceira onda da ética da IA.
+
+\hypertarget{os-cinco-princuxedpios}{%
+\subsection{Os cinco princípios}\label{os-cinco-princuxedpios}}
+
+O curso se organiza em torno de cinco princípios sobre os quais a ética
+da IA convergiu (Jobin et al., 2019):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Princípio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Pergunta que responde
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Capítulo
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Não-maleficência & Devemos usar a IA para o bem, e não para causar dano?
+& 2 \\
+Responsabilização & Quem deve ser responsabilizado quando a IA causa
+dano? & 3 \\
+Transparência & Devemos compreender o que a IA faz e por quê? & 4 \\
+Direitos humanos & A IA deve respeitar e promover os direitos humanos? &
+5 \\
+Equidade & A IA deve ser justa e não discriminatória? & 6 \\
+\end{longtable}
+
+\hypertarget{como-usar-este-material}{%
+\subsection{Como usar este material}\label{como-usar-este-material}}
+
+Cada capítulo está disponível em três formatos: HTML (para leitura na
+web ou importação em plataforma), PDF (para leitura e impressão) e LaTeX
+(fonte do PDF). O markdown de cada capítulo é a fonte de tudo.
+
+Os exercícios ficam em \texttt{exercicios/}, separados do gabarito, em
+\texttt{respostas/}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{licenca}
+
+\textbf{Material original:} \emph{Ethics of AI}, um curso online
+gratuito da Universidade de Helsinque. Professores responsáveis:
+Anna-Mari Rusanen e Jukka K. Nurminen. Demais contribuintes principais:
+Santeri Räisänen, Sasu Tarkoma e Saara Halmetoja. Disponível em
+\url{https://ethics-of-ai.mooc.fi/}.
+
+\textbf{Esta versão:} tradução e adaptação para o português brasileiro
+realizada por José Lucas Lira Bizil, Fernando Mazzeto Lisboa Lima e
+Matheus da Silva Fernandes, no âmbito do Programa CiberExt 26-29
+(FEELT38103), Universidade Federal de Uberlândia, 2026. Esta é uma obra
+derivada; os autores originais não a revisaram nem a endossam.
+
+\textbf{Licença:} Creative Commons
+Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional (CC BY-NC-SA
+4.0) ---
+\url{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br}.
+
+\end{licenca}
+
+\end{document}

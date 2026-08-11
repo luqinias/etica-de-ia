@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2026-01-01" />
+  <title>Ética da Inteligência Artificial</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">
+:root {
+
+--papel: #FBF8F3;
+--papel-alt: #F3EEE4;
+--tinta: #1F2933;
+--tinta-fraca: #5C6670;
+
+--conceitos: #24505C; 
+--aplicacoes: #16746C; 
+--riscos: #B45F14; 
+
+--ameixa: #77345F;
+--regra: #E4DBCD;
+--bloco: #F3EEE4;
+--nota: #EAF1F0;
+--caso: #FCF3E6;
+--filosofia:#F7EFF4;
+
+--serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia,
+"Times New Roman", serif;
+--sans: Optima, Candara, "Gill Sans", "Gill Sans MT", "Segoe UI", Avenir,
+"Trebuchet MS", sans-serif;
+--mono: "SFMono-Regular", "DejaVu Sans Mono", "Liberation Mono", Consolas,
+monospace;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+font-family: var(--serif);
+color: var(--tinta);
+background: var(--papel);
+line-height: 1.7;
+font-size: 18px;
+max-width: 780px;
+margin: 0 auto;
+padding: 0 26px 96px;
+hyphens: auto;
+}
+
+header#title-block-header {
+margin: 0 -26px 3rem;
+padding: 3.4rem 26px 2.2rem;
+background: var(--papel-alt);
+border-bottom: 1px solid var(--regra);
+position: relative;
+}
+header#title-block-header::before {
+content: "";
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 6px;
+background: linear-gradient(
+to right,
+var(--conceitos) 0%, var(--conceitos) 33.3%,
+var(--aplicacoes) 33.3%, var(--aplicacoes) 66.6%,
+var(--riscos) 66.6%, var(--riscos) 100%
+);
+}
+header#title-block-header .title {
+font-family: var(--sans);
+font-size: 2.15rem;
+font-weight: 600;
+line-height: 1.18;
+letter-spacing: -0.015em;
+color: var(--conceitos);
+margin: 0 0 0.5rem;
+}
+header#title-block-header .subtitle {
+font-family: var(--sans);
+font-size: 1.12rem;
+font-weight: 400;
+color: var(--tinta-fraca);
+margin: 0 0 1.4rem;
+}
+header#title-block-header .author,
+header#title-block-header .date {
+font-family: var(--sans);
+font-size: 0.82rem;
+color: var(--tinta-fraca);
+margin: 0.15rem 0;
+line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--sans);
+font-weight: 600;
+line-height: 1.25;
+letter-spacing: -0.01em;
+}
+h1 {
+font-size: 1.95rem;
+color: var(--conceitos);
+margin: 3rem 0 1.2rem;
+}
+h2 {
+font-size: 1.45rem;
+color: var(--conceitos);
+margin: 2.6rem 0 0.9rem;
+padding-bottom: 0.4rem;
+border-bottom: 1.5px solid var(--regra);
+}
+h3 {
+font-size: 1.16rem;
+color: var(--aplicacoes);
+margin: 2rem 0 0.7rem;
+}
+h4 {
+font-size: 1rem;
+color: var(--riscos);
+margin: 1.6rem 0 0.5rem;
+text-transform: uppercase;
+letter-spacing: 0.07em;
+font-size: 0.86rem;
+}
+
+p { margin: 0 0 1.15rem; }
+a {
+color: var(--ameixa);
+text-decoration: none;
+border-bottom: 1px solid rgba(119, 52, 95, 0.32);
+transition: border-color 0.15s ease, background 0.15s ease;
+}
+a:hover { border-bottom-color: var(--ameixa); background: rgba(119, 52, 95, 0.06); }
+a:focus-visible { outline: 2px solid var(--riscos); outline-offset: 2px; }
+
+a[href^="http"] {
+color: var(--riscos);
+border-bottom-color: rgba(180, 95, 20, 0.32);
+}
+a[href^="http"]:hover { border-bottom-color: var(--riscos); background: rgba(180, 95, 20, 0.07); }
+strong { font-weight: 700; color: var(--conceitos); }
+em { font-style: italic; }
+hr {
+border: 0;
+height: 1px;
+background: var(--regra);
+margin: 2.6rem 0;
+}
+
+ul, ol { margin: 0 0 1.2rem; padding-left: 1.35rem; }
+li { margin: 0.3rem 0; }
+li > ul, li > ol { margin: 0.3rem 0; }
+ul li::marker { color: var(--riscos); }
+ol li::marker { color: var(--aplicacoes); font-family: var(--sans); font-weight: 600; }
+
+blockquote {
+margin: 1.6rem 0;
+padding: 1.1rem 1.3rem;
+background: var(--caso);
+border-left: 3px solid var(--riscos);
+border-radius: 0 4px 4px 0;
+font-size: 0.97rem;
+}
+blockquote p:last-child { margin-bottom: 0; }
+blockquote cite {
+display: block;
+margin-top: 0.7rem;
+font-family: var(--sans);
+font-size: 0.8rem;
+font-style: normal;
+color: var(--tinta-fraca);
+}
+
+div.nota, div.caso, div.reflexao,
+div.filosofia, div.tecnica, div.contexto, div.definicao {
+margin: 1.7rem 0;
+padding: 1.15rem 1.35rem;
+border-radius: 5px;
+font-size: 0.97rem;
+}
+
+div.filosofia { background: var(--filosofia); border-left: 3px solid var(--ameixa); }
+div.tecnica { background: var(--nota); border-left: 3px solid var(--conceitos); }
+div.contexto { background: var(--papel-alt); border-left: 3px solid var(--aplicacoes); }
+div.definicao { background: var(--caso); border-left: 3px solid var(--riscos); }
+div.nota { background: var(--nota); border-left: 3px solid var(--conceitos); }
+div.caso { background: var(--caso); border-left: 3px solid var(--riscos); }
+div.reflexao { background: var(--papel-alt); border-left: 3px solid var(--aplicacoes); }
+
+div.nota::before, div.caso::before, div.reflexao::before,
+div.filosofia::before, div.tecnica::before,
+div.contexto::before, div.definicao::before {
+display: block;
+font-family: var(--sans);
+font-size: 0.72rem;
+font-weight: 700;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+margin-bottom: 0.55rem;
+}
+div.filosofia::before { content: "Conceito filosófico"; color: var(--ameixa); }
+div.tecnica::before { content: "Nota técnica"; color: var(--conceitos); }
+div.contexto::before { content: "Contexto"; color: var(--aplicacoes); }
+div.definicao::before { content: "Definição"; color: var(--riscos); }
+div.nota::before { content: "Nota"; color: var(--conceitos); }
+div.caso::before { content: "Caso"; color: var(--riscos); }
+div.reflexao::before { content: "Para pensar"; color: var(--aplicacoes); }
+div.filosofia[data-titulo]::before { content: attr(data-titulo); }
+div.tecnica[data-titulo]::before { content: attr(data-titulo); }
+div.contexto[data-titulo]::before { content: attr(data-titulo); }
+div.definicao[data-titulo]::before { content: attr(data-titulo); }
+div.nota[data-titulo]::before { content: attr(data-titulo); }
+div.caso[data-titulo]::before { content: attr(data-titulo); }
+div.reflexao[data-titulo]::before { content: attr(data-titulo); }
+div.nota > :last-child, div.caso > :last-child, div.reflexao > :last-child,
+div.filosofia > :last-child, div.tecnica > :last-child,
+div.contexto > :last-child, div.definicao > :last-child { margin-bottom: 0; }
+
+code {
+font-family: var(--mono);
+font-size: 0.87em;
+color: var(--ameixa);
+background: var(--bloco);
+padding: 0.1em 0.32em;
+border-radius: 3px;
+}
+pre {
+background: var(--bloco);
+border-left: 3px solid var(--ameixa);
+border-radius: 0 5px 5px 0;
+padding: 1rem 1.15rem;
+overflow-x: auto;
+margin: 1.5rem 0;
+font-size: 0.86rem;
+line-height: 1.55;
+}
+pre code { background: none; padding: 0; color: var(--tinta); font-size: 1em; }
+
+table {
+width: 100%;
+border-collapse: collapse;
+margin: 1.8rem 0;
+font-size: 0.93rem;
+font-family: var(--sans);
+}
+th {
+text-align: left;
+font-weight: 600;
+color: var(--conceitos);
+border-bottom: 2px solid var(--conceitos);
+padding: 0.55rem 0.7rem;
+}
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--regra); }
+tbody tr:nth-child(even) { background: rgba(243, 238, 228, 0.55); }
+caption {
+caption-side: bottom;
+font-family: var(--sans);
+font-size: 0.8rem;
+color: var(--tinta-fraca);
+padding-top: 0.6rem;
+text-align: left;
+}
+
+img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+figure { margin: 2rem 0; }
+figcaption {
+font-family: var(--sans);
+font-size: 0.82rem;
+color: var(--tinta-fraca);
+text-align: center;
+margin-top: 0.7rem;
+padding: 0 1rem;
+}
+
+nav#TOC {
+background: var(--papel-alt);
+border: 1px solid var(--regra);
+border-radius: 5px;
+padding: 1.3rem 1.6rem;
+margin: 0 0 2.8rem;
+font-family: var(--sans);
+font-size: 0.92rem;
+}
+nav#TOC::before {
+content: "Neste capítulo";
+display: block;
+font-size: 0.72rem;
+font-weight: 700;
+letter-spacing: 0.11em;
+text-transform: uppercase;
+color: var(--tinta-fraca);
+margin-bottom: 0.8rem;
+}
+nav#TOC ul { list-style: none; padding-left: 0; margin: 0; }
+nav#TOC ul ul { padding-left: 1.1rem; }
+nav#TOC li { margin: 0.28rem 0; }
+nav#TOC a { color: var(--conceitos); border-bottom: none; }
+nav#TOC a:hover { border-bottom: 1px solid var(--conceitos); background: none; }
+
+.footnotes {
+margin-top: 3.5rem;
+padding-top: 1.3rem;
+border-top: 1px solid var(--regra);
+font-size: 0.88rem;
+color: var(--tinta-fraca);
+}
+.footnotes hr { display: none; }
+
+div.licenca {
+margin-top: 3.5rem;
+padding-top: 1.4rem;
+border-top: 3px solid var(--regra);
+font-family: var(--sans);
+font-size: 0.79rem;
+line-height: 1.6;
+color: var(--tinta-fraca);
+}
+div.licenca a { color: var(--tinta-fraca); }
+
+@media (max-width: 620px) {
+body { font-size: 17px; padding: 0 18px 64px; }
+header#title-block-header { margin: 0 -18px 2.2rem; padding: 2.6rem 18px 1.8rem; }
+header#title-block-header .title { font-size: 1.7rem; }
+h1 { font-size: 1.55rem; }
+h2 { font-size: 1.28rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+* { transition: none !important; animation: none !important; }
+}
+@media print {
+body { background: #fff; font-size: 11pt; max-width: none; }
+header#title-block-header { background: none; }
+nav#TOC { break-after: page; }
+a { border-bottom: none; }
+a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; }
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Ética da Inteligência Artificial</h1>
+<p class="subtitle">Capítulo 7 — Exercícios</p>
+<p class="author"><p>Tradução e adaptação para o português: José Lucas
+Lira Bizil, Fernando Mazzeto Lisboa Lima e Matheus da Silva
+Fernandes<br />
+Programa CiberExt 26-29 · FEELT38103 · Universidade Federal de
+Uberlândia<br />
+Original: <em>Ethics of AI</em>, Universidade de Helsinque</p></p>
+<p class="date">2026</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#capítulo-7-exercícios" id="toc-capítulo-7-exercícios">Capítulo 7 — Exercícios</a>
+<ul>
+<li><a href="#exercício-12a-a-ética-da-ia-e-você-dissertativa" id="toc-exercício-12a-a-ética-da-ia-e-você-dissertativa">Exercício 12a —
+A ética da IA e você <code>[dissertativa]</code></a></li>
+<li><a href="#exercício-12b-a-ética-da-ia-e-você-dissertativa" id="toc-exercício-12b-a-ética-da-ia-e-você-dissertativa">Exercício 12b —
+A ética da IA e você <code>[dissertativa]</code></a></li>
+<li><a href="#exercício-12c-a-ética-da-ia-e-você-dissertativa" id="toc-exercício-12c-a-ética-da-ia-e-você-dissertativa">Exercício 12c —
+A ética da IA e você <code>[dissertativa]</code></a></li>
+<li><a href="#avaliação-do-capítulo-e-do-curso-pesquisa" id="toc-avaliação-do-capítulo-e-do-curso-pesquisa">Avaliação do capítulo
+e do curso <code>[pesquisa]</code></a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="capítulo-7-exercícios">Capítulo 7 — Exercícios</h1>
+<div class="nota" data-titulo="Sobre estes exercícios">
+<p>Os três exercícios deste capítulo seguem o mesmo formato: leia a
+citação, diga se concorda com suas afirmações e explique sua resposta.
+Juntos, apresentam três posições distintas sobre a mesma questão — se a
+ética da IA tem ou não efeito prático.</p>
+<p><strong>As citações foram traduzidas para o português.</strong> Os
+textos originais estão disponíveis nos links indicados, em inglês.</p>
+</div>
+<h2 id="exercício-12a-a-ética-da-ia-e-você-dissertativa">Exercício 12a —
+A ética da IA e você <code>[dissertativa]</code></h2>
+<p><strong>Pontuação:</strong> 2 pontos · <strong>Extensão:</strong> 75
+a 1500 palavras · <strong>Tentativas:</strong> ilimitadas
+<strong>Componente Open edX:</strong> <code>openassessment</code>
+(revisão por pares)</p>
+<p>Leia a citação a seguir. Você concorda com suas afirmações? Responda
+brevemente e explique sua resposta.</p>
+<blockquote>
+<p>Em 2019 falou-se mais de ética da IA do que nunca. Dezenas de
+organizações produziram diretrizes de ética da IA; empresas correram
+para constituir equipes de IA responsável e exibi-las diante da
+imprensa. Já é difícil participar de uma conferência sobre IA sem que
+parte da programação seja dedicada a alguma mensagem relacionada à
+ética: como proteger a privacidade das pessoas quando a IA precisa de
+tantos dados? Como empoderar comunidades marginalizadas em vez de
+explorá-las? Como continuar a confiar na mídia diante da desinformação
+criada e distribuída por algoritmos?</p>
+<p>Mas conversa é só conversa — não basta. Apesar de todo o discurso
+dedicado a essas questões, as diretrizes de ética da IA de muitas
+organizações permanecem vagas e difíceis de implementar. Poucas empresas
+conseguem mostrar mudanças concretas na maneira como produtos e serviços
+de IA são avaliados e aprovados. Estamos caindo na armadilha do
+<em>ethics-washing</em>, em que a ação genuína é substituída por
+promessas superficiais…</p>
+<p><cite>Karen Hao, “In 2020, let’s stop AI ethics-washing and actually
+do something”, <em>MIT Technology Review</em>. <a href="https://www.technologyreview.com/2019/12/27/57/ai-ethics-washing-time-to-act/" class="uri">https://www.technologyreview.com/2019/12/27/57/ai-ethics-washing-time-to-act/</a></cite></p>
+</blockquote>
+<hr />
+<h2 id="exercício-12b-a-ética-da-ia-e-você-dissertativa">Exercício 12b —
+A ética da IA e você <code>[dissertativa]</code></h2>
+<p><strong>Pontuação:</strong> 2 pontos · <strong>Extensão:</strong> 75
+a 1500 palavras · <strong>Tentativas:</strong> ilimitadas
+<strong>Componente Open edX:</strong> <code>openassessment</code>
+(revisão por pares)</p>
+<p>Leia a citação a seguir. Você concorda com suas afirmações? Responda
+brevemente e explique sua resposta.</p>
+<blockquote>
+<p>Lidar com o papel da filosofia e da ética exige superar ambas as
+tendências e enxergar a ética como um modo de investigação que facilita
+a avaliação de estratégias concorrentes de política tecnológica… Longe
+de impor um esquema autorregulatório ou determinada estrutura de
+governança, a filosofia moral, na verdade, facilita o questionamento e a
+reconsideração de qualquer prática dada, situando-a numa teia complexa
+de instituições jurídicas, políticas e econômicas.</p>
+<p>A filosofia moral pode, de fato, lançar nova luz sobre práticas
+humanas ao acrescentar a perspectiva necessária, explicando a relação
+entre a tecnologia e outros objetivos dignos, situando a tecnologia no
+humano, no social, no político. Tornou-se urgente começar a considerar a
+ética da tecnologia também de dentro, e não apenas de fora da ética.</p>
+<p><cite>Elena Bietti, “From Ethics Washing to Ethics Bashing: A View on
+Tech Ethics from Within Moral Philosophy”. <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3513182" class="uri">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3513182</a></cite></p>
+</blockquote>
+<hr />
+<h2 id="exercício-12c-a-ética-da-ia-e-você-dissertativa">Exercício 12c —
+A ética da IA e você <code>[dissertativa]</code></h2>
+<p><strong>Pontuação:</strong> 2 pontos · <strong>Extensão:</strong> 75
+a 1500 palavras · <strong>Tentativas:</strong> ilimitadas
+<strong>Componente Open edX:</strong> <code>openassessment</code>
+(revisão por pares)</p>
+<p>Leia a citação a seguir. Você concorda com suas afirmações? Responda
+brevemente e explique sua resposta.</p>
+<blockquote>
+<p>A ética tem dentes poderosos. Infelizmente, mal os estamos usando na
+ética da IA — não é de admirar, então, que a ética da IA seja chamada de
+desdentada. Este artigo reflete sobre os diversos mecanismos éticos que
+emergiram nos últimos anos em resposta à implantação e ao uso massivos
+da IA na sociedade e aos riscos associados. Esses mecanismos incluem
+listas de princípios, códigos de ética, recomendações e diretrizes.
+Ainda assim, como muitos mostraram, esses desenvolvimentos éticos,
+embora promissores, também são problemáticos: sua eficácia ainda está
+por ser demonstrada, e são particularmente suscetíveis à
+manipulação…</p>
+<p><cite>Anaïs Rességuier e Rowena Rodrigues, “AI ethics should not
+remain toothless! A call to bring back the teeth of ethics”. <a href="https://journals.sagepub.com/doi/full/10.1177/2053951720942541" class="uri">https://journals.sagepub.com/doi/full/10.1177/2053951720942541</a></cite></p>
+</blockquote>
+<hr />
+<h2 id="avaliação-do-capítulo-e-do-curso-pesquisa">Avaliação do capítulo
+e do curso <code>[pesquisa]</code></h2>
+<p><strong>Pontuação:</strong> 1 ponto · <strong>Tentativas:</strong>
+ilimitadas</p>
+<p>Desta vez a avaliação é também sobre o curso como um todo. Conte-nos
+o que foi bom e o que poderia ser melhorado no futuro.</p>
+<ul>
+<li><strong>Utilidade do curso como um todo</strong> — nota de 1 a
+5</li>
+<li><strong>Clareza do curso como um todo</strong> — nota de 1 a 5</li>
+<li><strong>Dificuldade do curso como um todo</strong> — nota de 1 a
+5</li>
+<li><strong>Comentários finais sobre o capítulo e o curso</strong> — até
+1200 palavras</li>
+</ul>
+<hr />
+<div class="licenca">
+<p><strong>Material original:</strong> <em>Ethics of AI</em>,
+Universidade de Helsinque. Professores responsáveis: Anna-Mari Rusanen e
+Jukka K. Nurminen. <a href="https://ethics-of-ai.mooc.fi/" class="uri">https://ethics-of-ai.mooc.fi/</a>. <strong>Esta
+versão:</strong> tradução por José Lucas Lira Bizil, Fernando Mazzeto
+Lisboa Lima e Matheus da Silva Fernandes, Programa CiberExt 26-29
+(FEELT38103), UFU, 2026. Obra derivada. <strong>Licença:</strong> CC
+BY-NC-SA 4.0.</p>
+</div>
+</body>
+</html>

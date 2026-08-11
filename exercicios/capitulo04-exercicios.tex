@@ -1,0 +1,436 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage[]{charter}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% ==========================================================================
+%  IA na Sociedade — cabeçalho LaTeX (pdflatex)
+%  Programa CiberExt 26-29 · FEELT38103
+%  Adaptado de "AI in Society" (Universidade de Helsinque / Una Europa)
+%  Licença: CC BY-NC-SA 4.0
+% --------------------------------------------------------------------------
+%  Espelha a identidade do ia-style.css: papel quente, tinta ardósia e a
+%  faixa tricolor dos três eixos do curso (conceitos / aplicações / riscos).
+% ==========================================================================
+
+% ---------- Fontes ----------
+% A serifada vem do build.sh, que passa  -V fontfamily=charter  ao pandoc.
+% Aqui só acrescentamos a sem-serifa; ambas com fallback, porque nem toda
+% instalação de LaTeX traz os mesmos pacotes.
+\IfFileExists{helvet.sty}{\usepackage[scaled=0.90]{helvet}}{}
+\usepackage{textcomp}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+% ---------- Pacotes de layout ----------
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{fvextra}
+\usepackage{newunicodechar}
+
+% ---------- Caracteres Unicode que o pdflatex não conhece ----------
+\newunicodechar{✓}{{\color{iaAplic}\checkmark}}
+\newunicodechar{✅}{{\color{iaAplic}\checkmark}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\newunicodechar{€}{\texteuro}
+\newunicodechar{£}{\textsterling}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{•}{\textbullet}
+\newunicodechar{″}{''}
+\newunicodechar{′}{'}
+
+% ==========================================================================
+%  PALETA — os mesmos valores do ia-style.css
+% ==========================================================================
+\definecolor{iaConceitos}{HTML}{24505C}   % petróleo — títulos, eixo 1
+\definecolor{iaAplic}{HTML}{16746C}       % verdete  — subtítulos, eixo 2
+\definecolor{iaRiscos}{HTML}{B45F14}      % açafrão  — destaques, eixo 3
+\definecolor{iaAmeixa}{HTML}{77345F}      % links internos, termos técnicos
+\definecolor{iaTinta}{HTML}{1F2933}       % corpo do texto
+\definecolor{iaTintaFraca}{HTML}{5C6670}
+\definecolor{iaRegra}{HTML}{E4DBCD}
+\definecolor{iaBloco}{HTML}{F3EEE4}
+\definecolor{iaNota}{HTML}{EAF1F0}
+\definecolor{iaCaso}{HTML}{FCF3E6}
+\definecolor{iaFilos}{HTML}{F7EFF4}
+
+\color{iaTinta}
+
+% ==========================================================================
+%  ASSINATURA — faixa tricolor dos três eixos
+% ==========================================================================
+\newcommand{\faixaEixos}[1][\linewidth]{%
+  \noindent
+  \textcolor{iaConceitos}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaAplic}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaRiscos}{\rule{0.3333#1}{4pt}}%
+  \par}
+
+% ---------- Página de título ----------
+\makeatletter
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\providecommand{\@subtitle}{}
+\def\@maketitle{%
+  \newpage\null\vskip 1.5em%
+  \faixaEixos
+  \vskip 2.2em
+  {\raggedright
+    {\sffamily\bfseries\huge\color{iaConceitos}\@title\par}%
+    \vskip 0.7em%
+    {\sffamily\large\color{iaTintaFraca}\@subtitle\par}%
+    \vskip 2em%
+    {\color{iaRegra}\rule{\linewidth}{1pt}}%
+    \vskip 1em%
+    {\sffamily\small\color{iaTinta}\@author\par}%
+    \vskip 0.5em%
+    {\sffamily\footnotesize\color{iaTintaFraca}\@date\par}%
+  }\par\vskip 2.5em}
+\makeatother
+
+% ==========================================================================
+%  TÍTULOS DE SEÇÃO
+% ==========================================================================
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{iaConceitos}}
+  {\thesection}{0.7em}{}
+  [{\vspace{2pt}\color{iaRegra}\titlerule[1.2pt]}]
+\titleformat{\subsection}
+  {\sffamily\large\bfseries\color{iaAplic}}
+  {\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\sffamily\normalsize\bfseries\color{iaRiscos}}
+  {\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}[runin]
+  {\sffamily\small\bfseries\color{iaRiscos}}
+  {}{0em}{}
+
+\titlespacing*{\section}{0pt}{2.6ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.2ex plus 1ex minus .2ex}{1ex plus .2ex}
+
+% ==========================================================================
+%  CABEÇALHO E RODAPÉ
+% ==========================================================================
+\setlength{\headheight}{24pt}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\sffamily\footnotesize\color{iaAplic}Ética da IA}
+\fancyhead[R]{\sffamily\footnotesize\color{iaAplic}\nouppercase{\leftmark}}
+\fancyfoot[C]{\sffamily\footnotesize\color{iaConceitos}\thepage}
+\renewcommand{\headrule}{%
+  \hbox to\headwidth{\color{iaRegra}\leaders\hrule height \headrulewidth\hfill}}
+
+% ==========================================================================
+%  TEXTO CORRIDO
+% ==========================================================================
+\linespread{1.08}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+\emergencystretch=3em
+\hbadness=10000
+
+% ---------- Termos técnicos / código inline ----------
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\color{iaAmeixa}\small\ttfamily #1}}
+
+% ---------- Blocos verbatim ----------
+\fvset{breaklines=true,breakanywhere=true,fontsize=\small}
+
+% ---------- Blocos de código (ambiente Shaded do pandoc) ----------
+\renewenvironment{Shaded}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaBloco,
+      borderline west={3pt}{0pt}{iaAmeixa},
+      left=10pt, right=8pt, top=6pt, bottom=6pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ---------- Citações: caixa de caso ----------
+\renewenvironment{quote}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaCaso,
+      borderline west={3pt}{0pt}{iaRiscos},
+      left=12pt, right=10pt, top=9pt, bottom=9pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ==========================================================================
+%  BLOCOS DE APOIO
+%  No markdown, escreva:   ::: nota   ...texto...   :::
+%  O pandoc converte fenced_divs para os ambientes abaixo.
+% ==========================================================================
+\newtcolorbox{iabox}[3]{
+  breakable, enhanced jigsaw, rounded corners,
+  arc=3pt, boxrule=0pt, frame hidden,
+  colback=#2,
+  borderline west={3pt}{0pt}{#1},
+  left=12pt, right=10pt, top=9pt, bottom=9pt,
+  before skip=11pt, after skip=11pt,
+  before upper={\setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}},
+  title={\sffamily\bfseries\footnotesize\textcolor{#1}{\MakeUppercase{#3}}},
+  attach title to upper={\par\vspace{5pt}},
+  fonttitle=\normalfont}
+
+% Cada ambiente aceita um titulo opcional entre colchetes, vindo do
+% atributo data-titulo do markdown:   \begin{filosofia}[Titulo] ... \end{filosofia}
+% Os quatro primeiros espelham os icones do material original.
+\newenvironment{filosofia}[1][Conceito filosofico]{\begin{iabox}{iaAmeixa}{iaFilos}{#1}}{\end{iabox}}
+\newenvironment{tecnica}[1][Nota tecnica]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{contexto}[1][Contexto]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{definicao}[1][Definicao]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+
+\newenvironment{nota}[1][Nota]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{caso}[1][Caso]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+\newenvironment{reflexao}[1][Para pensar]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{licenca}
+  {\par\vspace{2em}\faixaEixos\par\vspace{0.8em}
+   \begingroup\sffamily\scriptsize\color{iaTintaFraca}}
+  {\endgroup\par}
+
+% ==========================================================================
+%  LISTAS
+% ==========================================================================
+\setlist[itemize]{leftmargin=1.4em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=1.7em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\renewcommand{\labelitemi}{\textcolor{iaRiscos}{\textbullet}}
+\renewcommand{\labelitemii}{\textcolor{iaAplic}{--}}
+
+% ==========================================================================
+%  TABELAS
+% ==========================================================================
+\renewcommand{\arraystretch}{1.3}
+\arrayrulecolor{iaRegra}
+
+% ==========================================================================
+%  RÓTULOS EM PORTUGUÊS
+%  Definidos aqui (e não via -V na linha de comando) porque acentos passados
+%  como argumento dependem do locale do terminal e podem se corromper.
+% ==========================================================================
+\renewcommand{\contentsname}{Sumário}
+\renewcommand{\refname}{Referências}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabela}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Ética da Inteligência Artificial},
+  colorlinks=true,
+  linkcolor={iaAmeixa},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={iaRiscos},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Ética da Inteligência Artificial}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Capítulo 4 --- Exercícios}
+\author{Tradução e adaptação para o português: José Lucas Lira Bizil,
+Fernando Mazzeto Lisboa Lima e Matheus da Silva Fernandes\\
+Programa CiberExt 26-29 · FEELT38103 · Universidade Federal de
+Uberlândia\\
+Original: \emph{Ethics of AI}, Universidade de Helsinque}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=iaConceitos}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{capuxedtulo-4-exercuxedcios}{%
+\section{Capítulo 4 --- Exercícios}\label{capuxedtulo-4-exercuxedcios}}
+
+\hypertarget{exercuxedcio-8-visualizando-algoritmos-mista-escolha-dissertativa}{%
+\subsection{\texorpdfstring{Exercício 8 --- Visualizando algoritmos
+\texttt{{[}mista:\ escolha\ +\ dissertativa{]}}}{Exercício 8 --- Visualizando algoritmos {[}mista: escolha + dissertativa{]}}}\label{exercuxedcio-8-visualizando-algoritmos-mista-escolha-dissertativa}}
+
+\textbf{Pontuação:} 2 pontos · \textbf{Extensão:} 75 a 1000 palavras ·
+\textbf{Tentativas:} ilimitadas \textbf{Componente Open edX:}
+\texttt{multiplechoiceresponse} seguido de \texttt{openassessment}
+
+Há necessidade de traduzir conceitos algorítmicos para a linguagem
+cotidiana. A maioria das pessoas sem formação em computação não conhece
+o vocabulário básico da IA, o que afeta diretamente sua capacidade de
+compreender os desenvolvimentos recentes.
+
+\textbf{Imagem 1} --- diagrama técnico: agente, ambiente, estado (s\_t),
+recompensa (R\_t), ação (A\_t).
+
+\begin{figure}
+\centering
+\includegraphics{../Capitulo04/img/rl1.pdf}
+\caption{Aprendizado por reforço --- versão técnica}
+\end{figure}
+
+\textbf{Imagem 2} --- diagrama com robô: um robô num labirinto, com
+setas de ``recompensa, estado'' e ``ações'' ligando agente e ambiente.
+
+\begin{figure}
+\centering
+\includegraphics{../Capitulo04/img/rl2.pdf}
+\caption{Aprendizado por reforço --- versão com robô}
+\end{figure}
+
+\textbf{Imagem 3} --- diagrama com gato: um gato como agente, recebendo
+recompensa (sinal verde) ou não (sinal vermelho), com observação, ação e
+estado indicados.
+
+\begin{figure}
+\centering
+\includegraphics{../Capitulo04/img/rl3.pdf}
+\caption{Aprendizado por reforço --- versão com gato}
+\end{figure}
+
+Compare estas três visualizações de algoritmos de aprendizado por
+reforço. Qual delas é a mais compreensível? Por quê?
+
+\textbf{Primeira parte --- escolha:} qual das visualizações acima é a
+mais compreensível?
+
+\begin{itemize}
+\tightlist
+\item
+  ( ) Imagem 1
+\item
+  ( ) Imagem 2
+\item
+  ( ) Imagem 3
+\end{itemize}
+
+\textbf{Segunda parte --- explique sua decisão.} Leia as instruções com
+atenção e responda às perguntas a seguir. Sua resposta será revisada por
+outros participantes e pelos instrutores. Confira antes de enviar: uma
+vez enviada, não poderá mais editá-la.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Por que você escolheu essa imagem como a mais compreensível?
+\item
+  Que características a tornaram a mais compreensível?
+\item
+  A compreensibilidade de visualizações como essas depende de cultura e
+  de formação? Se sim, que elementos são dependentes de cultura ou de
+  formação? Como devemos levar a diversidade em conta?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{avaliauxe7uxe3o-do-capuxedtulo-pesquisa}{%
+\subsection{\texorpdfstring{Avaliação do capítulo
+\texttt{{[}pesquisa{]}}}{Avaliação do capítulo {[}pesquisa{]}}}\label{avaliauxe7uxe3o-do-capuxedtulo-pesquisa}}
+
+\textbf{Pontuação:} 1 ponto · \textbf{Tentativas:} ilimitadas
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Utilidade deste capítulo} --- nota de 1 a 5
+\item
+  \textbf{Clareza deste capítulo} --- nota de 1 a 5
+\item
+  \textbf{Dificuldade deste capítulo} --- nota de 1 a 5
+\item
+  \textbf{Outros comentários} --- até 600 palavras
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{licenca}
+
+\textbf{Material original:} \emph{Ethics of AI}, Universidade de
+Helsinque. Professores responsáveis: Anna-Mari Rusanen e Jukka K.
+Nurminen. \url{https://ethics-of-ai.mooc.fi/}. \textbf{Esta versão:}
+tradução por José Lucas Lira Bizil, Fernando Mazzeto Lisboa Lima e
+Matheus da Silva Fernandes, Programa CiberExt 26-29 (FEELT38103), UFU,
+2026. Obra derivada. \textbf{Licença:} CC BY-NC-SA 4.0.
+
+\end{licenca}
+
+\end{document}

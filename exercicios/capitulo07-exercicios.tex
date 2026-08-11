@@ -1,0 +1,462 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage[]{charter}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% ==========================================================================
+%  IA na Sociedade — cabeçalho LaTeX (pdflatex)
+%  Programa CiberExt 26-29 · FEELT38103
+%  Adaptado de "AI in Society" (Universidade de Helsinque / Una Europa)
+%  Licença: CC BY-NC-SA 4.0
+% --------------------------------------------------------------------------
+%  Espelha a identidade do ia-style.css: papel quente, tinta ardósia e a
+%  faixa tricolor dos três eixos do curso (conceitos / aplicações / riscos).
+% ==========================================================================
+
+% ---------- Fontes ----------
+% A serifada vem do build.sh, que passa  -V fontfamily=charter  ao pandoc.
+% Aqui só acrescentamos a sem-serifa; ambas com fallback, porque nem toda
+% instalação de LaTeX traz os mesmos pacotes.
+\IfFileExists{helvet.sty}{\usepackage[scaled=0.90]{helvet}}{}
+\usepackage{textcomp}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+% ---------- Pacotes de layout ----------
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{fvextra}
+\usepackage{newunicodechar}
+
+% ---------- Caracteres Unicode que o pdflatex não conhece ----------
+\newunicodechar{✓}{{\color{iaAplic}\checkmark}}
+\newunicodechar{✅}{{\color{iaAplic}\checkmark}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\newunicodechar{€}{\texteuro}
+\newunicodechar{£}{\textsterling}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{•}{\textbullet}
+\newunicodechar{″}{''}
+\newunicodechar{′}{'}
+
+% ==========================================================================
+%  PALETA — os mesmos valores do ia-style.css
+% ==========================================================================
+\definecolor{iaConceitos}{HTML}{24505C}   % petróleo — títulos, eixo 1
+\definecolor{iaAplic}{HTML}{16746C}       % verdete  — subtítulos, eixo 2
+\definecolor{iaRiscos}{HTML}{B45F14}      % açafrão  — destaques, eixo 3
+\definecolor{iaAmeixa}{HTML}{77345F}      % links internos, termos técnicos
+\definecolor{iaTinta}{HTML}{1F2933}       % corpo do texto
+\definecolor{iaTintaFraca}{HTML}{5C6670}
+\definecolor{iaRegra}{HTML}{E4DBCD}
+\definecolor{iaBloco}{HTML}{F3EEE4}
+\definecolor{iaNota}{HTML}{EAF1F0}
+\definecolor{iaCaso}{HTML}{FCF3E6}
+\definecolor{iaFilos}{HTML}{F7EFF4}
+
+\color{iaTinta}
+
+% ==========================================================================
+%  ASSINATURA — faixa tricolor dos três eixos
+% ==========================================================================
+\newcommand{\faixaEixos}[1][\linewidth]{%
+  \noindent
+  \textcolor{iaConceitos}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaAplic}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaRiscos}{\rule{0.3333#1}{4pt}}%
+  \par}
+
+% ---------- Página de título ----------
+\makeatletter
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\providecommand{\@subtitle}{}
+\def\@maketitle{%
+  \newpage\null\vskip 1.5em%
+  \faixaEixos
+  \vskip 2.2em
+  {\raggedright
+    {\sffamily\bfseries\huge\color{iaConceitos}\@title\par}%
+    \vskip 0.7em%
+    {\sffamily\large\color{iaTintaFraca}\@subtitle\par}%
+    \vskip 2em%
+    {\color{iaRegra}\rule{\linewidth}{1pt}}%
+    \vskip 1em%
+    {\sffamily\small\color{iaTinta}\@author\par}%
+    \vskip 0.5em%
+    {\sffamily\footnotesize\color{iaTintaFraca}\@date\par}%
+  }\par\vskip 2.5em}
+\makeatother
+
+% ==========================================================================
+%  TÍTULOS DE SEÇÃO
+% ==========================================================================
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{iaConceitos}}
+  {\thesection}{0.7em}{}
+  [{\vspace{2pt}\color{iaRegra}\titlerule[1.2pt]}]
+\titleformat{\subsection}
+  {\sffamily\large\bfseries\color{iaAplic}}
+  {\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\sffamily\normalsize\bfseries\color{iaRiscos}}
+  {\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}[runin]
+  {\sffamily\small\bfseries\color{iaRiscos}}
+  {}{0em}{}
+
+\titlespacing*{\section}{0pt}{2.6ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.2ex plus 1ex minus .2ex}{1ex plus .2ex}
+
+% ==========================================================================
+%  CABEÇALHO E RODAPÉ
+% ==========================================================================
+\setlength{\headheight}{24pt}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\sffamily\footnotesize\color{iaAplic}Ética da IA}
+\fancyhead[R]{\sffamily\footnotesize\color{iaAplic}\nouppercase{\leftmark}}
+\fancyfoot[C]{\sffamily\footnotesize\color{iaConceitos}\thepage}
+\renewcommand{\headrule}{%
+  \hbox to\headwidth{\color{iaRegra}\leaders\hrule height \headrulewidth\hfill}}
+
+% ==========================================================================
+%  TEXTO CORRIDO
+% ==========================================================================
+\linespread{1.08}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+\emergencystretch=3em
+\hbadness=10000
+
+% ---------- Termos técnicos / código inline ----------
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\color{iaAmeixa}\small\ttfamily #1}}
+
+% ---------- Blocos verbatim ----------
+\fvset{breaklines=true,breakanywhere=true,fontsize=\small}
+
+% ---------- Blocos de código (ambiente Shaded do pandoc) ----------
+\renewenvironment{Shaded}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaBloco,
+      borderline west={3pt}{0pt}{iaAmeixa},
+      left=10pt, right=8pt, top=6pt, bottom=6pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ---------- Citações: caixa de caso ----------
+\renewenvironment{quote}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaCaso,
+      borderline west={3pt}{0pt}{iaRiscos},
+      left=12pt, right=10pt, top=9pt, bottom=9pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ==========================================================================
+%  BLOCOS DE APOIO
+%  No markdown, escreva:   ::: nota   ...texto...   :::
+%  O pandoc converte fenced_divs para os ambientes abaixo.
+% ==========================================================================
+\newtcolorbox{iabox}[3]{
+  breakable, enhanced jigsaw, rounded corners,
+  arc=3pt, boxrule=0pt, frame hidden,
+  colback=#2,
+  borderline west={3pt}{0pt}{#1},
+  left=12pt, right=10pt, top=9pt, bottom=9pt,
+  before skip=11pt, after skip=11pt,
+  before upper={\setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}},
+  title={\sffamily\bfseries\footnotesize\textcolor{#1}{\MakeUppercase{#3}}},
+  attach title to upper={\par\vspace{5pt}},
+  fonttitle=\normalfont}
+
+% Cada ambiente aceita um titulo opcional entre colchetes, vindo do
+% atributo data-titulo do markdown:   \begin{filosofia}[Titulo] ... \end{filosofia}
+% Os quatro primeiros espelham os icones do material original.
+\newenvironment{filosofia}[1][Conceito filosofico]{\begin{iabox}{iaAmeixa}{iaFilos}{#1}}{\end{iabox}}
+\newenvironment{tecnica}[1][Nota tecnica]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{contexto}[1][Contexto]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{definicao}[1][Definicao]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+
+\newenvironment{nota}[1][Nota]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{caso}[1][Caso]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+\newenvironment{reflexao}[1][Para pensar]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{licenca}
+  {\par\vspace{2em}\faixaEixos\par\vspace{0.8em}
+   \begingroup\sffamily\scriptsize\color{iaTintaFraca}}
+  {\endgroup\par}
+
+% ==========================================================================
+%  LISTAS
+% ==========================================================================
+\setlist[itemize]{leftmargin=1.4em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=1.7em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\renewcommand{\labelitemi}{\textcolor{iaRiscos}{\textbullet}}
+\renewcommand{\labelitemii}{\textcolor{iaAplic}{--}}
+
+% ==========================================================================
+%  TABELAS
+% ==========================================================================
+\renewcommand{\arraystretch}{1.3}
+\arrayrulecolor{iaRegra}
+
+% ==========================================================================
+%  RÓTULOS EM PORTUGUÊS
+%  Definidos aqui (e não via -V na linha de comando) porque acentos passados
+%  como argumento dependem do locale do terminal e podem se corromper.
+% ==========================================================================
+\renewcommand{\contentsname}{Sumário}
+\renewcommand{\refname}{Referências}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabela}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Ética da Inteligência Artificial},
+  colorlinks=true,
+  linkcolor={iaAmeixa},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={iaRiscos},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Ética da Inteligência Artificial}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Capítulo 7 --- Exercícios}
+\author{Tradução e adaptação para o português: José Lucas Lira Bizil,
+Fernando Mazzeto Lisboa Lima e Matheus da Silva Fernandes\\
+Programa CiberExt 26-29 · FEELT38103 · Universidade Federal de
+Uberlândia\\
+Original: \emph{Ethics of AI}, Universidade de Helsinque}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=iaConceitos}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{capuxedtulo-7-exercuxedcios}{%
+\section{Capítulo 7 --- Exercícios}\label{capuxedtulo-7-exercuxedcios}}
+
+\begin{nota}[Sobre estes exercícios]
+
+Os três exercícios deste capítulo seguem o mesmo formato: leia a
+citação, diga se concorda com suas afirmações e explique sua resposta.
+Juntos, apresentam três posições distintas sobre a mesma questão --- se
+a ética da IA tem ou não efeito prático.
+
+\textbf{As citações foram traduzidas para o português.} Os textos
+originais estão disponíveis nos links indicados, em inglês.
+
+\end{nota}
+
+\hypertarget{exercuxedcio-12a-a-uxe9tica-da-ia-e-vocuxea-dissertativa}{%
+\subsection{\texorpdfstring{Exercício 12a --- A ética da IA e você
+\texttt{{[}dissertativa{]}}}{Exercício 12a --- A ética da IA e você {[}dissertativa{]}}}\label{exercuxedcio-12a-a-uxe9tica-da-ia-e-vocuxea-dissertativa}}
+
+\textbf{Pontuação:} 2 pontos · \textbf{Extensão:} 75 a 1500 palavras ·
+\textbf{Tentativas:} ilimitadas \textbf{Componente Open edX:}
+\texttt{openassessment} (revisão por pares)
+
+Leia a citação a seguir. Você concorda com suas afirmações? Responda
+brevemente e explique sua resposta.
+
+\begin{quote}
+Em 2019 falou-se mais de ética da IA do que nunca. Dezenas de
+organizações produziram diretrizes de ética da IA; empresas correram
+para constituir equipes de IA responsável e exibi-las diante da
+imprensa. Já é difícil participar de uma conferência sobre IA sem que
+parte da programação seja dedicada a alguma mensagem relacionada à
+ética: como proteger a privacidade das pessoas quando a IA precisa de
+tantos dados? Como empoderar comunidades marginalizadas em vez de
+explorá-las? Como continuar a confiar na mídia diante da desinformação
+criada e distribuída por algoritmos?
+
+Mas conversa é só conversa --- não basta. Apesar de todo o discurso
+dedicado a essas questões, as diretrizes de ética da IA de muitas
+organizações permanecem vagas e difíceis de implementar. Poucas empresas
+conseguem mostrar mudanças concretas na maneira como produtos e serviços
+de IA são avaliados e aprovados. Estamos caindo na armadilha do
+\emph{ethics-washing}, em que a ação genuína é substituída por promessas
+superficiais\ldots{}
+
+Karen Hao, ``In 2020, let's stop AI ethics-washing and actually do
+something'', \emph{MIT Technology Review}.
+\url{https://www.technologyreview.com/2019/12/27/57/ai-ethics-washing-time-to-act/}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exercuxedcio-12b-a-uxe9tica-da-ia-e-vocuxea-dissertativa}{%
+\subsection{\texorpdfstring{Exercício 12b --- A ética da IA e você
+\texttt{{[}dissertativa{]}}}{Exercício 12b --- A ética da IA e você {[}dissertativa{]}}}\label{exercuxedcio-12b-a-uxe9tica-da-ia-e-vocuxea-dissertativa}}
+
+\textbf{Pontuação:} 2 pontos · \textbf{Extensão:} 75 a 1500 palavras ·
+\textbf{Tentativas:} ilimitadas \textbf{Componente Open edX:}
+\texttt{openassessment} (revisão por pares)
+
+Leia a citação a seguir. Você concorda com suas afirmações? Responda
+brevemente e explique sua resposta.
+
+\begin{quote}
+Lidar com o papel da filosofia e da ética exige superar ambas as
+tendências e enxergar a ética como um modo de investigação que facilita
+a avaliação de estratégias concorrentes de política tecnológica\ldots{}
+Longe de impor um esquema autorregulatório ou determinada estrutura de
+governança, a filosofia moral, na verdade, facilita o questionamento e a
+reconsideração de qualquer prática dada, situando-a numa teia complexa
+de instituições jurídicas, políticas e econômicas.
+
+A filosofia moral pode, de fato, lançar nova luz sobre práticas humanas
+ao acrescentar a perspectiva necessária, explicando a relação entre a
+tecnologia e outros objetivos dignos, situando a tecnologia no humano,
+no social, no político. Tornou-se urgente começar a considerar a ética
+da tecnologia também de dentro, e não apenas de fora da ética.
+
+Elena Bietti, ``From Ethics Washing to Ethics Bashing: A View on Tech
+Ethics from Within Moral Philosophy''.
+\url{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3513182}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exercuxedcio-12c-a-uxe9tica-da-ia-e-vocuxea-dissertativa}{%
+\subsection{\texorpdfstring{Exercício 12c --- A ética da IA e você
+\texttt{{[}dissertativa{]}}}{Exercício 12c --- A ética da IA e você {[}dissertativa{]}}}\label{exercuxedcio-12c-a-uxe9tica-da-ia-e-vocuxea-dissertativa}}
+
+\textbf{Pontuação:} 2 pontos · \textbf{Extensão:} 75 a 1500 palavras ·
+\textbf{Tentativas:} ilimitadas \textbf{Componente Open edX:}
+\texttt{openassessment} (revisão por pares)
+
+Leia a citação a seguir. Você concorda com suas afirmações? Responda
+brevemente e explique sua resposta.
+
+\begin{quote}
+A ética tem dentes poderosos. Infelizmente, mal os estamos usando na
+ética da IA --- não é de admirar, então, que a ética da IA seja chamada
+de desdentada. Este artigo reflete sobre os diversos mecanismos éticos
+que emergiram nos últimos anos em resposta à implantação e ao uso
+massivos da IA na sociedade e aos riscos associados. Esses mecanismos
+incluem listas de princípios, códigos de ética, recomendações e
+diretrizes. Ainda assim, como muitos mostraram, esses desenvolvimentos
+éticos, embora promissores, também são problemáticos: sua eficácia ainda
+está por ser demonstrada, e são particularmente suscetíveis à
+manipulação\ldots{}
+
+Anaïs Rességuier e Rowena Rodrigues, ``AI ethics should not remain
+toothless! A call to bring back the teeth of ethics''.
+\url{https://journals.sagepub.com/doi/full/10.1177/2053951720942541}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{avaliauxe7uxe3o-do-capuxedtulo-e-do-curso-pesquisa}{%
+\subsection{\texorpdfstring{Avaliação do capítulo e do curso
+\texttt{{[}pesquisa{]}}}{Avaliação do capítulo e do curso {[}pesquisa{]}}}\label{avaliauxe7uxe3o-do-capuxedtulo-e-do-curso-pesquisa}}
+
+\textbf{Pontuação:} 1 ponto · \textbf{Tentativas:} ilimitadas
+
+Desta vez a avaliação é também sobre o curso como um todo. Conte-nos o
+que foi bom e o que poderia ser melhorado no futuro.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Utilidade do curso como um todo} --- nota de 1 a 5
+\item
+  \textbf{Clareza do curso como um todo} --- nota de 1 a 5
+\item
+  \textbf{Dificuldade do curso como um todo} --- nota de 1 a 5
+\item
+  \textbf{Comentários finais sobre o capítulo e o curso} --- até 1200
+  palavras
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{licenca}
+
+\textbf{Material original:} \emph{Ethics of AI}, Universidade de
+Helsinque. Professores responsáveis: Anna-Mari Rusanen e Jukka K.
+Nurminen. \url{https://ethics-of-ai.mooc.fi/}. \textbf{Esta versão:}
+tradução por José Lucas Lira Bizil, Fernando Mazzeto Lisboa Lima e
+Matheus da Silva Fernandes, Programa CiberExt 26-29 (FEELT38103), UFU,
+2026. Obra derivada. \textbf{Licença:} CC BY-NC-SA 4.0.
+
+\end{licenca}
+
+\end{document}

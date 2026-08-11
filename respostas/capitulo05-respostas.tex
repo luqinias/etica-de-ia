@@ -1,0 +1,491 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage[]{charter}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% ==========================================================================
+%  IA na Sociedade — cabeçalho LaTeX (pdflatex)
+%  Programa CiberExt 26-29 · FEELT38103
+%  Adaptado de "AI in Society" (Universidade de Helsinque / Una Europa)
+%  Licença: CC BY-NC-SA 4.0
+% --------------------------------------------------------------------------
+%  Espelha a identidade do ia-style.css: papel quente, tinta ardósia e a
+%  faixa tricolor dos três eixos do curso (conceitos / aplicações / riscos).
+% ==========================================================================
+
+% ---------- Fontes ----------
+% A serifada vem do build.sh, que passa  -V fontfamily=charter  ao pandoc.
+% Aqui só acrescentamos a sem-serifa; ambas com fallback, porque nem toda
+% instalação de LaTeX traz os mesmos pacotes.
+\IfFileExists{helvet.sty}{\usepackage[scaled=0.90]{helvet}}{}
+\usepackage{textcomp}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+% ---------- Pacotes de layout ----------
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{fvextra}
+\usepackage{newunicodechar}
+
+% ---------- Caracteres Unicode que o pdflatex não conhece ----------
+\newunicodechar{✓}{{\color{iaAplic}\checkmark}}
+\newunicodechar{✅}{{\color{iaAplic}\checkmark}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\newunicodechar{€}{\texteuro}
+\newunicodechar{£}{\textsterling}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{•}{\textbullet}
+\newunicodechar{″}{''}
+\newunicodechar{′}{'}
+
+% ==========================================================================
+%  PALETA — os mesmos valores do ia-style.css
+% ==========================================================================
+\definecolor{iaConceitos}{HTML}{24505C}   % petróleo — títulos, eixo 1
+\definecolor{iaAplic}{HTML}{16746C}       % verdete  — subtítulos, eixo 2
+\definecolor{iaRiscos}{HTML}{B45F14}      % açafrão  — destaques, eixo 3
+\definecolor{iaAmeixa}{HTML}{77345F}      % links internos, termos técnicos
+\definecolor{iaTinta}{HTML}{1F2933}       % corpo do texto
+\definecolor{iaTintaFraca}{HTML}{5C6670}
+\definecolor{iaRegra}{HTML}{E4DBCD}
+\definecolor{iaBloco}{HTML}{F3EEE4}
+\definecolor{iaNota}{HTML}{EAF1F0}
+\definecolor{iaCaso}{HTML}{FCF3E6}
+\definecolor{iaFilos}{HTML}{F7EFF4}
+
+\color{iaTinta}
+
+% ==========================================================================
+%  ASSINATURA — faixa tricolor dos três eixos
+% ==========================================================================
+\newcommand{\faixaEixos}[1][\linewidth]{%
+  \noindent
+  \textcolor{iaConceitos}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaAplic}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaRiscos}{\rule{0.3333#1}{4pt}}%
+  \par}
+
+% ---------- Página de título ----------
+\makeatletter
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\providecommand{\@subtitle}{}
+\def\@maketitle{%
+  \newpage\null\vskip 1.5em%
+  \faixaEixos
+  \vskip 2.2em
+  {\raggedright
+    {\sffamily\bfseries\huge\color{iaConceitos}\@title\par}%
+    \vskip 0.7em%
+    {\sffamily\large\color{iaTintaFraca}\@subtitle\par}%
+    \vskip 2em%
+    {\color{iaRegra}\rule{\linewidth}{1pt}}%
+    \vskip 1em%
+    {\sffamily\small\color{iaTinta}\@author\par}%
+    \vskip 0.5em%
+    {\sffamily\footnotesize\color{iaTintaFraca}\@date\par}%
+  }\par\vskip 2.5em}
+\makeatother
+
+% ==========================================================================
+%  TÍTULOS DE SEÇÃO
+% ==========================================================================
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{iaConceitos}}
+  {\thesection}{0.7em}{}
+  [{\vspace{2pt}\color{iaRegra}\titlerule[1.2pt]}]
+\titleformat{\subsection}
+  {\sffamily\large\bfseries\color{iaAplic}}
+  {\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\sffamily\normalsize\bfseries\color{iaRiscos}}
+  {\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}[runin]
+  {\sffamily\small\bfseries\color{iaRiscos}}
+  {}{0em}{}
+
+\titlespacing*{\section}{0pt}{2.6ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.2ex plus 1ex minus .2ex}{1ex plus .2ex}
+
+% ==========================================================================
+%  CABEÇALHO E RODAPÉ
+% ==========================================================================
+\setlength{\headheight}{24pt}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\sffamily\footnotesize\color{iaAplic}Ética da IA}
+\fancyhead[R]{\sffamily\footnotesize\color{iaAplic}\nouppercase{\leftmark}}
+\fancyfoot[C]{\sffamily\footnotesize\color{iaConceitos}\thepage}
+\renewcommand{\headrule}{%
+  \hbox to\headwidth{\color{iaRegra}\leaders\hrule height \headrulewidth\hfill}}
+
+% ==========================================================================
+%  TEXTO CORRIDO
+% ==========================================================================
+\linespread{1.08}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+\emergencystretch=3em
+\hbadness=10000
+
+% ---------- Termos técnicos / código inline ----------
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\color{iaAmeixa}\small\ttfamily #1}}
+
+% ---------- Blocos verbatim ----------
+\fvset{breaklines=true,breakanywhere=true,fontsize=\small}
+
+% ---------- Blocos de código (ambiente Shaded do pandoc) ----------
+\renewenvironment{Shaded}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaBloco,
+      borderline west={3pt}{0pt}{iaAmeixa},
+      left=10pt, right=8pt, top=6pt, bottom=6pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ---------- Citações: caixa de caso ----------
+\renewenvironment{quote}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaCaso,
+      borderline west={3pt}{0pt}{iaRiscos},
+      left=12pt, right=10pt, top=9pt, bottom=9pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ==========================================================================
+%  BLOCOS DE APOIO
+%  No markdown, escreva:   ::: nota   ...texto...   :::
+%  O pandoc converte fenced_divs para os ambientes abaixo.
+% ==========================================================================
+\newtcolorbox{iabox}[3]{
+  breakable, enhanced jigsaw, rounded corners,
+  arc=3pt, boxrule=0pt, frame hidden,
+  colback=#2,
+  borderline west={3pt}{0pt}{#1},
+  left=12pt, right=10pt, top=9pt, bottom=9pt,
+  before skip=11pt, after skip=11pt,
+  before upper={\setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}},
+  title={\sffamily\bfseries\footnotesize\textcolor{#1}{\MakeUppercase{#3}}},
+  attach title to upper={\par\vspace{5pt}},
+  fonttitle=\normalfont}
+
+% Cada ambiente aceita um titulo opcional entre colchetes, vindo do
+% atributo data-titulo do markdown:   \begin{filosofia}[Titulo] ... \end{filosofia}
+% Os quatro primeiros espelham os icones do material original.
+\newenvironment{filosofia}[1][Conceito filosofico]{\begin{iabox}{iaAmeixa}{iaFilos}{#1}}{\end{iabox}}
+\newenvironment{tecnica}[1][Nota tecnica]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{contexto}[1][Contexto]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{definicao}[1][Definicao]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+
+\newenvironment{nota}[1][Nota]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{caso}[1][Caso]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+\newenvironment{reflexao}[1][Para pensar]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{licenca}
+  {\par\vspace{2em}\faixaEixos\par\vspace{0.8em}
+   \begingroup\sffamily\scriptsize\color{iaTintaFraca}}
+  {\endgroup\par}
+
+% ==========================================================================
+%  LISTAS
+% ==========================================================================
+\setlist[itemize]{leftmargin=1.4em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=1.7em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\renewcommand{\labelitemi}{\textcolor{iaRiscos}{\textbullet}}
+\renewcommand{\labelitemii}{\textcolor{iaAplic}{--}}
+
+% ==========================================================================
+%  TABELAS
+% ==========================================================================
+\renewcommand{\arraystretch}{1.3}
+\arrayrulecolor{iaRegra}
+
+% ==========================================================================
+%  RÓTULOS EM PORTUGUÊS
+%  Definidos aqui (e não via -V na linha de comando) porque acentos passados
+%  como argumento dependem do locale do terminal e podem se corromper.
+% ==========================================================================
+\renewcommand{\contentsname}{Sumário}
+\renewcommand{\refname}{Referências}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabela}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Ética da Inteligência Artificial},
+  pdfauthor={Programa CiberExt 26-29 · FEELT38103 · uso do docente},
+  colorlinks=true,
+  linkcolor={iaAmeixa},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={iaRiscos},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Ética da Inteligência Artificial}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Capítulo 05 --- Gabarito e critérios}
+\author{Programa CiberExt 26-29 · FEELT38103 · uso do docente}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=iaConceitos}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{capuxedtulo-05-gabarito-e-crituxe9rios}{%
+\section{Capítulo 05 --- Gabarito e
+critérios}\label{capuxedtulo-05-gabarito-e-crituxe9rios}}
+
+\begin{nota}[Material de uso do docente]
+
+Não publicar junto com o curso. Todos os exercícios deste capítulo são
+dissertativos e avaliados por revisão por pares: não há resposta única,
+e o que segue são critérios de avaliação e erros a observar.
+
+\end{nota}
+
+\hypertarget{exercuxedcios-9a-e-9b-a-declarauxe7uxe3o-dos-direitos-humanos-da-ia}{%
+\subsection{Exercícios 9a e 9b --- A Declaração dos Direitos Humanos da
+IA}\label{exercuxedcios-9a-e-9b-a-declarauxe7uxe3o-dos-direitos-humanos-da-ia}}
+
+Oito artigos da DUDH, quatro em cada exercício. Para cada um, pede-se a
+relação com a IA \textbf{e um exemplo}. O exemplo é obrigatório:
+resposta sem exemplo é incompleta, por mais bem formulada que seja.
+
+\textbf{Relações esperadas, artigo a artigo:}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Artigo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Relação com a IA
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 --- liberdade e igualdade em dignidade & sistemas que classificam
+pessoas por características arbitrárias; a dignidade não pode ser objeto
+de otimização \\
+7 --- igualdade perante a lei & decisão automatizada em crédito,
+seleção, policiamento preditivo; o caso Svea Ekonomi (cap. 6) serve de
+exemplo \\
+12 --- privacidade & vigilância, inferências de alto risco, dados
+biométricos; RGPD \\
+25 --- padrão de vida adequado & sistemas de triagem em saúde e
+benefícios sociais; o caso de Helsinque \\
+18 --- pensamento e consciência & sistemas de recomendação e bolhas
+informacionais; manipulação de comportamento \\
+21 --- participação no governo & desinformação algorítmica,
+microssegmentação eleitoral \\
+26 --- educação & notas atribuídas por algoritmo (o caso que abre o cap.
+6); acesso desigual a tecnologia educacional \\
+27 --- vida cultural e autoria & dados de treinamento e obras
+protegidas; distribuição dos benefícios do avanço científico \\
+\end{longtable}
+
+\textbf{O 9b tem uma exigência a mais:} o material é dirigido a crianças
+de 10 a 12 anos. A resposta precisa mostrar \textbf{adaptação de
+linguagem e de exemplo}, não apenas simplificação. Um exemplo adequado
+para essa faixa parte de algo que a criança vive --- o vídeo que aparece
+recomendado, o jogo, o filtro de foto.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Critério
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Insuficiente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Adequado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Excelente
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Relaciona artigo e IA & genérico & relação clara & relação precisa e não
+óbvia \\
+Fornece exemplo & ausente & presente & concreto e verificável \\
+9b: adequação à faixa etária & linguagem adulta & simplificada & parte
+da experiência da criança \\
+\end{longtable}
+
+\textbf{Erro comum no 9b:} apenas encurtar as frases do 9a. Simplificar
+vocabulário não é adaptar: o exemplo precisa mudar.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exercuxedcio-10-limitar-o-truxe1fego-de-pedestres}{%
+\subsection{Exercício 10 --- Limitar o tráfego de
+pedestres}\label{exercuxedcio-10-limitar-o-truxe1fego-de-pedestres}}
+
+\textbf{Sem resposta certa.} As duas posições --- liberdade de locomoção
+ou segurança no trânsito --- podem render respostas excelentes.
+
+Uma resposta adequada deve:
+
+\begin{itemize}
+\tightlist
+\item
+  tomar posição explícita, e não apenas expor os dois lados;
+\item
+  reconhecer que ambos são direitos, e não apenas preferências;
+\item
+  justificar a hierarquia adotada com um critério, e não por intuição.
+\end{itemize}
+
+Respostas excelentes fazem ao menos uma destas coisas:
+
+\begin{itemize}
+\tightlist
+\item
+  questionam a própria dicotomia, como o texto do capítulo sugere --- é
+  uma falsa escolha, produzida por uma solução técnica que talvez nunca
+  fosse viável;
+\item
+  notam a \textbf{redistribuição de responsabilidade}: a proposta
+  transfere o ônus da segurança do fabricante do veículo para o
+  pedestre;
+\item
+  usam o paralelo do \emph{jaywalking} --- a criminalização de
+  atravessar fora da faixa não existia até que as vias fossem
+  reconcebidas em torno do automóvel. Quem tem o ônus de se adaptar
+  revela quem detém poder.
+\end{itemize}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Critério
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Insuficiente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Adequado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Excelente
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Toma posição & expõe sem decidir & decide & decide e enfrenta a objeção
+mais forte \\
+Trata ambos como direitos & trata um como capricho & reconhece ambos &
+discute a priorização entre direitos \\
+Vai além da dicotomia & aceita os termos dados & questiona & usa o
+paralelo histórico \\
+\end{longtable}
+
+\textbf{Erro comum:} responder como se fosse pergunta de opinião pessoal
+(``acho que segurança é mais importante''), sem critério que sustente a
+hierarquia.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{licenca}
+
+Gabarito elaborado a partir de \emph{Ethics of AI}, Universidade de
+Helsinque. Tradução e adaptação: José Lucas Lira Bizil, Fernando Mazzeto
+Lisboa Lima e Matheus da Silva Fernandes, Programa CiberExt 26-29
+(FEELT38103), UFU, 2026. Licença CC BY-NC-SA 4.0.
+
+\end{licenca}
+
+\end{document}

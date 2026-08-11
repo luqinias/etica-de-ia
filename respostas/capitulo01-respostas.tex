@@ -1,0 +1,478 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage[]{charter}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% ==========================================================================
+%  IA na Sociedade — cabeçalho LaTeX (pdflatex)
+%  Programa CiberExt 26-29 · FEELT38103
+%  Adaptado de "AI in Society" (Universidade de Helsinque / Una Europa)
+%  Licença: CC BY-NC-SA 4.0
+% --------------------------------------------------------------------------
+%  Espelha a identidade do ia-style.css: papel quente, tinta ardósia e a
+%  faixa tricolor dos três eixos do curso (conceitos / aplicações / riscos).
+% ==========================================================================
+
+% ---------- Fontes ----------
+% A serifada vem do build.sh, que passa  -V fontfamily=charter  ao pandoc.
+% Aqui só acrescentamos a sem-serifa; ambas com fallback, porque nem toda
+% instalação de LaTeX traz os mesmos pacotes.
+\IfFileExists{helvet.sty}{\usepackage[scaled=0.90]{helvet}}{}
+\usepackage{textcomp}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+% ---------- Pacotes de layout ----------
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{fvextra}
+\usepackage{newunicodechar}
+
+% ---------- Caracteres Unicode que o pdflatex não conhece ----------
+\newunicodechar{✓}{{\color{iaAplic}\checkmark}}
+\newunicodechar{✅}{{\color{iaAplic}\checkmark}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{–}{--}
+\newunicodechar{—}{---}
+\newunicodechar{€}{\texteuro}
+\newunicodechar{£}{\textsterling}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{•}{\textbullet}
+\newunicodechar{″}{''}
+\newunicodechar{′}{'}
+
+% ==========================================================================
+%  PALETA — os mesmos valores do ia-style.css
+% ==========================================================================
+\definecolor{iaConceitos}{HTML}{24505C}   % petróleo — títulos, eixo 1
+\definecolor{iaAplic}{HTML}{16746C}       % verdete  — subtítulos, eixo 2
+\definecolor{iaRiscos}{HTML}{B45F14}      % açafrão  — destaques, eixo 3
+\definecolor{iaAmeixa}{HTML}{77345F}      % links internos, termos técnicos
+\definecolor{iaTinta}{HTML}{1F2933}       % corpo do texto
+\definecolor{iaTintaFraca}{HTML}{5C6670}
+\definecolor{iaRegra}{HTML}{E4DBCD}
+\definecolor{iaBloco}{HTML}{F3EEE4}
+\definecolor{iaNota}{HTML}{EAF1F0}
+\definecolor{iaCaso}{HTML}{FCF3E6}
+\definecolor{iaFilos}{HTML}{F7EFF4}
+
+\color{iaTinta}
+
+% ==========================================================================
+%  ASSINATURA — faixa tricolor dos três eixos
+% ==========================================================================
+\newcommand{\faixaEixos}[1][\linewidth]{%
+  \noindent
+  \textcolor{iaConceitos}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaAplic}{\rule{0.3333#1}{4pt}}%
+  \textcolor{iaRiscos}{\rule{0.3333#1}{4pt}}%
+  \par}
+
+% ---------- Página de título ----------
+\makeatletter
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\providecommand{\@subtitle}{}
+\def\@maketitle{%
+  \newpage\null\vskip 1.5em%
+  \faixaEixos
+  \vskip 2.2em
+  {\raggedright
+    {\sffamily\bfseries\huge\color{iaConceitos}\@title\par}%
+    \vskip 0.7em%
+    {\sffamily\large\color{iaTintaFraca}\@subtitle\par}%
+    \vskip 2em%
+    {\color{iaRegra}\rule{\linewidth}{1pt}}%
+    \vskip 1em%
+    {\sffamily\small\color{iaTinta}\@author\par}%
+    \vskip 0.5em%
+    {\sffamily\footnotesize\color{iaTintaFraca}\@date\par}%
+  }\par\vskip 2.5em}
+\makeatother
+
+% ==========================================================================
+%  TÍTULOS DE SEÇÃO
+% ==========================================================================
+\titleformat{\section}[block]
+  {\sffamily\Large\bfseries\color{iaConceitos}}
+  {\thesection}{0.7em}{}
+  [{\vspace{2pt}\color{iaRegra}\titlerule[1.2pt]}]
+\titleformat{\subsection}
+  {\sffamily\large\bfseries\color{iaAplic}}
+  {\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\sffamily\normalsize\bfseries\color{iaRiscos}}
+  {\thesubsubsection}{0.5em}{}
+\titleformat{\paragraph}[runin]
+  {\sffamily\small\bfseries\color{iaRiscos}}
+  {}{0em}{}
+
+\titlespacing*{\section}{0pt}{2.6ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.2ex plus 1ex minus .2ex}{1ex plus .2ex}
+
+% ==========================================================================
+%  CABEÇALHO E RODAPÉ
+% ==========================================================================
+\setlength{\headheight}{24pt}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\sffamily\footnotesize\color{iaAplic}Ética da IA}
+\fancyhead[R]{\sffamily\footnotesize\color{iaAplic}\nouppercase{\leftmark}}
+\fancyfoot[C]{\sffamily\footnotesize\color{iaConceitos}\thepage}
+\renewcommand{\headrule}{%
+  \hbox to\headwidth{\color{iaRegra}\leaders\hrule height \headrulewidth\hfill}}
+
+% ==========================================================================
+%  TEXTO CORRIDO
+% ==========================================================================
+\linespread{1.08}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+\emergencystretch=3em
+\hbadness=10000
+
+% ---------- Termos técnicos / código inline ----------
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\color{iaAmeixa}\small\ttfamily #1}}
+
+% ---------- Blocos verbatim ----------
+\fvset{breaklines=true,breakanywhere=true,fontsize=\small}
+
+% ---------- Blocos de código (ambiente Shaded do pandoc) ----------
+\renewenvironment{Shaded}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaBloco,
+      borderline west={3pt}{0pt}{iaAmeixa},
+      left=10pt, right=8pt, top=6pt, bottom=6pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ---------- Citações: caixa de caso ----------
+\renewenvironment{quote}
+  {\begin{tcolorbox}[
+      breakable, enhanced jigsaw, rounded corners,
+      arc=3pt, boxrule=0pt, frame hidden,
+      colback=iaCaso,
+      borderline west={3pt}{0pt}{iaRiscos},
+      left=12pt, right=10pt, top=9pt, bottom=9pt,
+      before skip=9pt, after skip=9pt]}
+  {\end{tcolorbox}}
+
+% ==========================================================================
+%  BLOCOS DE APOIO
+%  No markdown, escreva:   ::: nota   ...texto...   :::
+%  O pandoc converte fenced_divs para os ambientes abaixo.
+% ==========================================================================
+\newtcolorbox{iabox}[3]{
+  breakable, enhanced jigsaw, rounded corners,
+  arc=3pt, boxrule=0pt, frame hidden,
+  colback=#2,
+  borderline west={3pt}{0pt}{#1},
+  left=12pt, right=10pt, top=9pt, bottom=9pt,
+  before skip=11pt, after skip=11pt,
+  before upper={\setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}},
+  title={\sffamily\bfseries\footnotesize\textcolor{#1}{\MakeUppercase{#3}}},
+  attach title to upper={\par\vspace{5pt}},
+  fonttitle=\normalfont}
+
+% Cada ambiente aceita um titulo opcional entre colchetes, vindo do
+% atributo data-titulo do markdown:   \begin{filosofia}[Titulo] ... \end{filosofia}
+% Os quatro primeiros espelham os icones do material original.
+\newenvironment{filosofia}[1][Conceito filosofico]{\begin{iabox}{iaAmeixa}{iaFilos}{#1}}{\end{iabox}}
+\newenvironment{tecnica}[1][Nota tecnica]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{contexto}[1][Contexto]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{definicao}[1][Definicao]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+
+\newenvironment{nota}[1][Nota]{\begin{iabox}{iaConceitos}{iaNota}{#1}}{\end{iabox}}
+\newenvironment{caso}[1][Caso]{\begin{iabox}{iaRiscos}{iaCaso}{#1}}{\end{iabox}}
+\newenvironment{reflexao}[1][Para pensar]{\begin{iabox}{iaAplic}{iaBloco}{#1}}{\end{iabox}}
+\newenvironment{licenca}
+  {\par\vspace{2em}\faixaEixos\par\vspace{0.8em}
+   \begingroup\sffamily\scriptsize\color{iaTintaFraca}}
+  {\endgroup\par}
+
+% ==========================================================================
+%  LISTAS
+% ==========================================================================
+\setlist[itemize]{leftmargin=1.4em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\setlist[enumerate]{leftmargin=1.7em, itemsep=2pt, topsep=4pt, parsep=0pt}
+\renewcommand{\labelitemi}{\textcolor{iaRiscos}{\textbullet}}
+\renewcommand{\labelitemii}{\textcolor{iaAplic}{--}}
+
+% ==========================================================================
+%  TABELAS
+% ==========================================================================
+\renewcommand{\arraystretch}{1.3}
+\arrayrulecolor{iaRegra}
+
+% ==========================================================================
+%  RÓTULOS EM PORTUGUÊS
+%  Definidos aqui (e não via -V na linha de comando) porque acentos passados
+%  como argumento dependem do locale do terminal e podem se corromper.
+% ==========================================================================
+\renewcommand{\contentsname}{Sumário}
+\renewcommand{\refname}{Referências}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabela}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Ética da Inteligência Artificial},
+  pdfauthor={Programa CiberExt 26-29 · FEELT38103 · uso do docente},
+  colorlinks=true,
+  linkcolor={iaAmeixa},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={iaRiscos},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Ética da Inteligência Artificial}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Capítulo 1 --- Gabarito e critérios}
+\author{Programa CiberExt 26-29 · FEELT38103 · uso do docente}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=iaConceitos}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{capuxedtulo-1-gabarito-e-crituxe9rios}{%
+\section{Capítulo 1 --- Gabarito e
+critérios}\label{capuxedtulo-1-gabarito-e-crituxe9rios}}
+
+\begin{nota}[Material de uso do docente]
+
+Não publicar junto com o curso. Existe no repositório porque faz parte
+da entrega acadêmica do projeto de extensão.
+
+\end{nota}
+
+\hypertarget{exercuxedcios-1a-e-1b-valores-e-normas}{%
+\subsection{Exercícios 1a e 1b --- Valores e
+normas}\label{exercuxedcios-1a-e-1b-valores-e-normas}}
+
+\textbf{Não há resposta certa.} São instrumentos de autoconhecimento,
+adaptados da escala de valores de Schwartz (2001). Todos os
+participantes recebem o ponto por responderem.
+
+\textbf{O que observar na discussão em fórum:} o interesse pedagógico
+está na diferença entre as duas listas. Valores que a pessoa marca como
+pessoais no 1a com frequência não são os que ela prioriza no 1b, quando
+age como formuladora de política pública. Vale pedir que os estudantes
+comparem as próprias respostas --- essa dissonância é o ponto do
+exercício e prepara o terreno para a guilhotina de Hume.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exercuxedcio-2-associauxe7uxe3o-valores-normas}{%
+\subsection{Exercício 2 --- Associação valores ×
+normas}\label{exercuxedcio-2-associauxe7uxe3o-valores-normas}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Norma
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valor
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1. Proteções adicionais sobre dados de treinamento & Privacidade \\
+2. Promover justiça e eliminar discriminação & Igualdade e não
+discriminação \\
+3. Libertar as pessoas do trabalho rotineiro & Autorrealização e
+florescimento humano \\
+4. Não manipular cidadãos em eleições & Democracia \\
+5. Reduzir a pegada de carbono da IA & Proteção da natureza \\
+6. Não prejudicar a liberdade de estabelecer padrões próprios &
+Autonomia \\
+7. Robustez técnica e proteção contra uso malicioso & Segurança \\
+\end{longtable}
+
+\textbf{Justificativa geral:} cada norma é a formulação prescritiva
+(``deve-se\ldots{}'') de um valor subjacente. O exercício treina
+exatamente a distinção valor/norma da seção III do capítulo.
+
+\textbf{Confusões esperadas:} os itens 1 e 7 se confundem (privacidade ×
+segurança) --- a diferença é que o item 1 trata de controle sobre os
+próprios dados, e o 7, de resistência a ataques. Os itens 3 e 6 também
+se confundem (autorrealização × autonomia) --- o 3 é sobre poder
+desenvolver-se, o 6, sobre não ter o próprio juízo substituído.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exercuxedcio-3-tuitando-sobre-questuxf5es-uxe9ticas}{%
+\subsection{Exercício 3 --- Tuitando sobre questões
+éticas}\label{exercuxedcio-3-tuitando-sobre-questuxf5es-uxe9ticas}}
+
+\textbf{Sem resposta única.} Avaliado por revisão por pares.
+
+Uma resposta adequada deve:
+
+\begin{itemize}
+\tightlist
+\item
+  tomar uma posição explícita sobre o caso, e não apenas descrevê-lo;
+\item
+  reconhecer que o comportamento do modelo reflete padrões estatísticos
+  dos dados de treinamento, não uma ``opinião'' da máquina;
+\item
+  evitar as duas saídas fáceis: ``é só um algoritmo, não tem culpa'' e
+  ``a tecnologia é racista/sexista por natureza''.
+\end{itemize}
+
+\textbf{Erros comuns:} confundir a explicação técnica (por que o modelo
+faz isso) com a justificação ética (se isso é aceitável) --- é a
+guilhotina de Hume em ação; tratar o caso como problema puramente
+técnico, solucionável com mais dados.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exercuxedcio-3c-ensaio-150-a-300-palavras}{%
+\subsection{Exercício 3c --- Ensaio (150 a 300
+palavras)}\label{exercuxedcio-3c-ensaio-150-a-300-palavras}}
+
+Uma resposta adequada deve identificar ao menos três dos seguintes
+elementos:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Valores em jogo:} igualdade, dignidade, representação justa.
+\item
+  \textbf{Normas:} a IA não deve reforçar estereótipos; sistemas devem
+  ser testados quanto a viés antes da implantação.
+\item
+  \textbf{Princípios:} equidade e não discriminação (cap. 6),
+  transparência (cap. 4), responsabilização (cap. 3).
+\item
+  \textbf{A distinção fato/valor:} o fato de os dados serem enviesados
+  não determina, sozinho, que seja errado --- é preciso um argumento
+  normativo adicional.
+\end{itemize}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Critério
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Insuficiente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Adequado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Excelente
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Identifica valores e normas & não distingue os dois & distingue e nomeia
+& articula a relação entre eles \\
+Julga a importância & apenas descreve & julga com justificativa &
+pondera argumentos contrários \\
+Usa conceitos do capítulo & ausentes & presentes & aplicados com
+precisão \\
+Extensão e clareza & fora do limite & dentro do limite & bem
+estruturado \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{licenca}
+
+Gabarito elaborado a partir de \emph{Ethics of AI}, Universidade de
+Helsinque. Tradução e adaptação: José Lucas Lira Bizil, Fernando Mazzeto
+Lisboa Lima e Matheus da Silva Fernandes, Programa CiberExt 26-29
+(FEELT38103), UFU, 2026. Licença CC BY-NC-SA 4.0.
+
+\end{licenca}
+
+\end{document}

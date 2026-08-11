@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2026-01-01" />
+  <title>Ética da Inteligência Artificial</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">
+:root {
+
+--papel: #FBF8F3;
+--papel-alt: #F3EEE4;
+--tinta: #1F2933;
+--tinta-fraca: #5C6670;
+
+--conceitos: #24505C; 
+--aplicacoes: #16746C; 
+--riscos: #B45F14; 
+
+--ameixa: #77345F;
+--regra: #E4DBCD;
+--bloco: #F3EEE4;
+--nota: #EAF1F0;
+--caso: #FCF3E6;
+--filosofia:#F7EFF4;
+
+--serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia,
+"Times New Roman", serif;
+--sans: Optima, Candara, "Gill Sans", "Gill Sans MT", "Segoe UI", Avenir,
+"Trebuchet MS", sans-serif;
+--mono: "SFMono-Regular", "DejaVu Sans Mono", "Liberation Mono", Consolas,
+monospace;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+font-family: var(--serif);
+color: var(--tinta);
+background: var(--papel);
+line-height: 1.7;
+font-size: 18px;
+max-width: 780px;
+margin: 0 auto;
+padding: 0 26px 96px;
+hyphens: auto;
+}
+
+header#title-block-header {
+margin: 0 -26px 3rem;
+padding: 3.4rem 26px 2.2rem;
+background: var(--papel-alt);
+border-bottom: 1px solid var(--regra);
+position: relative;
+}
+header#title-block-header::before {
+content: "";
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 6px;
+background: linear-gradient(
+to right,
+var(--conceitos) 0%, var(--conceitos) 33.3%,
+var(--aplicacoes) 33.3%, var(--aplicacoes) 66.6%,
+var(--riscos) 66.6%, var(--riscos) 100%
+);
+}
+header#title-block-header .title {
+font-family: var(--sans);
+font-size: 2.15rem;
+font-weight: 600;
+line-height: 1.18;
+letter-spacing: -0.015em;
+color: var(--conceitos);
+margin: 0 0 0.5rem;
+}
+header#title-block-header .subtitle {
+font-family: var(--sans);
+font-size: 1.12rem;
+font-weight: 400;
+color: var(--tinta-fraca);
+margin: 0 0 1.4rem;
+}
+header#title-block-header .author,
+header#title-block-header .date {
+font-family: var(--sans);
+font-size: 0.82rem;
+color: var(--tinta-fraca);
+margin: 0.15rem 0;
+line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--sans);
+font-weight: 600;
+line-height: 1.25;
+letter-spacing: -0.01em;
+}
+h1 {
+font-size: 1.95rem;
+color: var(--conceitos);
+margin: 3rem 0 1.2rem;
+}
+h2 {
+font-size: 1.45rem;
+color: var(--conceitos);
+margin: 2.6rem 0 0.9rem;
+padding-bottom: 0.4rem;
+border-bottom: 1.5px solid var(--regra);
+}
+h3 {
+font-size: 1.16rem;
+color: var(--aplicacoes);
+margin: 2rem 0 0.7rem;
+}
+h4 {
+font-size: 1rem;
+color: var(--riscos);
+margin: 1.6rem 0 0.5rem;
+text-transform: uppercase;
+letter-spacing: 0.07em;
+font-size: 0.86rem;
+}
+
+p { margin: 0 0 1.15rem; }
+a {
+color: var(--ameixa);
+text-decoration: none;
+border-bottom: 1px solid rgba(119, 52, 95, 0.32);
+transition: border-color 0.15s ease, background 0.15s ease;
+}
+a:hover { border-bottom-color: var(--ameixa); background: rgba(119, 52, 95, 0.06); }
+a:focus-visible { outline: 2px solid var(--riscos); outline-offset: 2px; }
+
+a[href^="http"] {
+color: var(--riscos);
+border-bottom-color: rgba(180, 95, 20, 0.32);
+}
+a[href^="http"]:hover { border-bottom-color: var(--riscos); background: rgba(180, 95, 20, 0.07); }
+strong { font-weight: 700; color: var(--conceitos); }
+em { font-style: italic; }
+hr {
+border: 0;
+height: 1px;
+background: var(--regra);
+margin: 2.6rem 0;
+}
+
+ul, ol { margin: 0 0 1.2rem; padding-left: 1.35rem; }
+li { margin: 0.3rem 0; }
+li > ul, li > ol { margin: 0.3rem 0; }
+ul li::marker { color: var(--riscos); }
+ol li::marker { color: var(--aplicacoes); font-family: var(--sans); font-weight: 600; }
+
+blockquote {
+margin: 1.6rem 0;
+padding: 1.1rem 1.3rem;
+background: var(--caso);
+border-left: 3px solid var(--riscos);
+border-radius: 0 4px 4px 0;
+font-size: 0.97rem;
+}
+blockquote p:last-child { margin-bottom: 0; }
+blockquote cite {
+display: block;
+margin-top: 0.7rem;
+font-family: var(--sans);
+font-size: 0.8rem;
+font-style: normal;
+color: var(--tinta-fraca);
+}
+
+div.nota, div.caso, div.reflexao,
+div.filosofia, div.tecnica, div.contexto, div.definicao {
+margin: 1.7rem 0;
+padding: 1.15rem 1.35rem;
+border-radius: 5px;
+font-size: 0.97rem;
+}
+
+div.filosofia { background: var(--filosofia); border-left: 3px solid var(--ameixa); }
+div.tecnica { background: var(--nota); border-left: 3px solid var(--conceitos); }
+div.contexto { background: var(--papel-alt); border-left: 3px solid var(--aplicacoes); }
+div.definicao { background: var(--caso); border-left: 3px solid var(--riscos); }
+div.nota { background: var(--nota); border-left: 3px solid var(--conceitos); }
+div.caso { background: var(--caso); border-left: 3px solid var(--riscos); }
+div.reflexao { background: var(--papel-alt); border-left: 3px solid var(--aplicacoes); }
+
+div.nota::before, div.caso::before, div.reflexao::before,
+div.filosofia::before, div.tecnica::before,
+div.contexto::before, div.definicao::before {
+display: block;
+font-family: var(--sans);
+font-size: 0.72rem;
+font-weight: 700;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+margin-bottom: 0.55rem;
+}
+div.filosofia::before { content: "Conceito filosófico"; color: var(--ameixa); }
+div.tecnica::before { content: "Nota técnica"; color: var(--conceitos); }
+div.contexto::before { content: "Contexto"; color: var(--aplicacoes); }
+div.definicao::before { content: "Definição"; color: var(--riscos); }
+div.nota::before { content: "Nota"; color: var(--conceitos); }
+div.caso::before { content: "Caso"; color: var(--riscos); }
+div.reflexao::before { content: "Para pensar"; color: var(--aplicacoes); }
+div.filosofia[data-titulo]::before { content: attr(data-titulo); }
+div.tecnica[data-titulo]::before { content: attr(data-titulo); }
+div.contexto[data-titulo]::before { content: attr(data-titulo); }
+div.definicao[data-titulo]::before { content: attr(data-titulo); }
+div.nota[data-titulo]::before { content: attr(data-titulo); }
+div.caso[data-titulo]::before { content: attr(data-titulo); }
+div.reflexao[data-titulo]::before { content: attr(data-titulo); }
+div.nota > :last-child, div.caso > :last-child, div.reflexao > :last-child,
+div.filosofia > :last-child, div.tecnica > :last-child,
+div.contexto > :last-child, div.definicao > :last-child { margin-bottom: 0; }
+
+code {
+font-family: var(--mono);
+font-size: 0.87em;
+color: var(--ameixa);
+background: var(--bloco);
+padding: 0.1em 0.32em;
+border-radius: 3px;
+}
+pre {
+background: var(--bloco);
+border-left: 3px solid var(--ameixa);
+border-radius: 0 5px 5px 0;
+padding: 1rem 1.15rem;
+overflow-x: auto;
+margin: 1.5rem 0;
+font-size: 0.86rem;
+line-height: 1.55;
+}
+pre code { background: none; padding: 0; color: var(--tinta); font-size: 1em; }
+
+table {
+width: 100%;
+border-collapse: collapse;
+margin: 1.8rem 0;
+font-size: 0.93rem;
+font-family: var(--sans);
+}
+th {
+text-align: left;
+font-weight: 600;
+color: var(--conceitos);
+border-bottom: 2px solid var(--conceitos);
+padding: 0.55rem 0.7rem;
+}
+td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--regra); }
+tbody tr:nth-child(even) { background: rgba(243, 238, 228, 0.55); }
+caption {
+caption-side: bottom;
+font-family: var(--sans);
+font-size: 0.8rem;
+color: var(--tinta-fraca);
+padding-top: 0.6rem;
+text-align: left;
+}
+
+img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+figure { margin: 2rem 0; }
+figcaption {
+font-family: var(--sans);
+font-size: 0.82rem;
+color: var(--tinta-fraca);
+text-align: center;
+margin-top: 0.7rem;
+padding: 0 1rem;
+}
+
+nav#TOC {
+background: var(--papel-alt);
+border: 1px solid var(--regra);
+border-radius: 5px;
+padding: 1.3rem 1.6rem;
+margin: 0 0 2.8rem;
+font-family: var(--sans);
+font-size: 0.92rem;
+}
+nav#TOC::before {
+content: "Neste capítulo";
+display: block;
+font-size: 0.72rem;
+font-weight: 700;
+letter-spacing: 0.11em;
+text-transform: uppercase;
+color: var(--tinta-fraca);
+margin-bottom: 0.8rem;
+}
+nav#TOC ul { list-style: none; padding-left: 0; margin: 0; }
+nav#TOC ul ul { padding-left: 1.1rem; }
+nav#TOC li { margin: 0.28rem 0; }
+nav#TOC a { color: var(--conceitos); border-bottom: none; }
+nav#TOC a:hover { border-bottom: 1px solid var(--conceitos); background: none; }
+
+.footnotes {
+margin-top: 3.5rem;
+padding-top: 1.3rem;
+border-top: 1px solid var(--regra);
+font-size: 0.88rem;
+color: var(--tinta-fraca);
+}
+.footnotes hr { display: none; }
+
+div.licenca {
+margin-top: 3.5rem;
+padding-top: 1.4rem;
+border-top: 3px solid var(--regra);
+font-family: var(--sans);
+font-size: 0.79rem;
+line-height: 1.6;
+color: var(--tinta-fraca);
+}
+div.licenca a { color: var(--tinta-fraca); }
+
+@media (max-width: 620px) {
+body { font-size: 17px; padding: 0 18px 64px; }
+header#title-block-header { margin: 0 -18px 2.2rem; padding: 2.6rem 18px 1.8rem; }
+header#title-block-header .title { font-size: 1.7rem; }
+h1 { font-size: 1.55rem; }
+h2 { font-size: 1.28rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+* { transition: none !important; animation: none !important; }
+}
+@media print {
+body { background: #fff; font-size: 11pt; max-width: none; }
+header#title-block-header { background: none; }
+nav#TOC { break-after: page; }
+a { border-bottom: none; }
+a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; }
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Ética da Inteligência Artificial</h1>
+<p class="subtitle">Capítulo 2 — Exercícios</p>
+<p class="author"><p>Tradução e adaptação para o português: José Lucas
+Lira Bizil, Fernando Mazzeto Lisboa Lima e Matheus da Silva
+Fernandes<br />
+Programa CiberExt 26-29 · FEELT38103 · Universidade Federal de
+Uberlândia<br />
+Original: <em>Ethics of AI</em>, Universidade de Helsinque</p></p>
+<p class="date">2026</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#capítulo-2-exercícios" id="toc-capítulo-2-exercícios">Capítulo 2 — Exercícios</a>
+<ul>
+<li><a href="#exercício-4-dos-benefícios-imediatos-aos-objetivos-éticos-de-longo-prazo-dissertativa" id="toc-exercício-4-dos-benefícios-imediatos-aos-objetivos-éticos-de-longo-prazo-dissertativa">Exercício
+4 — Dos benefícios imediatos aos objetivos éticos de longo prazo
+<code>[dissertativa]</code></a></li>
+<li><a href="#exercício-5-como-a-ia-poderia-promover-o-bem-dissertativa-quatro-partes" id="toc-exercício-5-como-a-ia-poderia-promover-o-bem-dissertativa-quatro-partes">Exercício
+5 — Como a IA poderia promover o bem?
+<code>[dissertativa · quatro partes]</code></a></li>
+<li><a href="#avaliação-do-capítulo-pesquisa" id="toc-avaliação-do-capítulo-pesquisa">Avaliação do capítulo
+<code>[pesquisa]</code></a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="capítulo-2-exercícios">Capítulo 2 — Exercícios</h1>
+<h2 id="exercício-4-dos-benefícios-imediatos-aos-objetivos-éticos-de-longo-prazo-dissertativa">Exercício
+4 — Dos benefícios imediatos aos objetivos éticos de longo prazo
+<code>[dissertativa]</code></h2>
+<p><strong>Pontuação:</strong> 3 pontos · <strong>Extensão:</strong> 75
+a 1000 palavras · <strong>Tentativas:</strong> ilimitadas
+<strong>Componente Open edX:</strong> <code>openassessment</code>
+(revisão por pares)</p>
+<p>Lembre-se do exemplo que abriu este capítulo, sobre a migração de uma
+saúde reativa para uma saúde preventiva. Como diretor digital, pede-se
+agora que você tome uma decisão. A organização de saúde da cidade
+deveria migrar da saúde reativa para a preventiva e começar a implantar
+métodos de análise de dados?</p>
+<p>Os sistemas preveem os possíveis riscos de saúde dos cidadãos
+analisando um grande número de critérios a partir de diversos
+prontuários médicos. São projetados para identificar indivíduos de alto
+risco. Se essas pessoas puderem ser priorizadas, isso pode permitir
+melhor estimativa de impacto e melhor planejamento dos serviços básicos
+de saúde.</p>
+<p>A saúde preventiva também tem potencial de reduzir significativamente
+os custos sociais e de saúde. Essas economias, enfatiza o relatório,
+poderiam ser usadas para outras finalidades, como o desenvolvimento de
+escolas.</p>
+<p>Responda brevemente às questões a seguir. Avalie:</p>
+<ol type="1">
+<li>Os benefícios e riscos <strong>imediatos</strong>, do aqui e agora,
+de implantar os sistemas de saúde preventiva.</li>
+<li>Os impactos de <strong>médio prazo</strong> — como esses sistemas
+poderiam afetar o mercado de trabalho, a educação ou, por exemplo, a
+distribuição do bem-estar entre os cidadãos?</li>
+<li>Os objetivos éticos fundamentais de <strong>longo prazo</strong> do
+desenvolvimento e uso de análise de dados em saúde preventiva. Como o
+cidadão é visto enquanto cidadão? Quais são os princípios ou valores
+éticos promovidos pela cidade? Como o uso da tecnologia é justificado
+eticamente?</li>
+</ol>
+<p>Responda a todos os itens acima. Sua resposta será revisada por
+outros participantes e pelos instrutores. Confira antes de enviar: uma
+vez enviada, não poderá mais editá-la.</p>
+<hr />
+<h2 id="exercício-5-como-a-ia-poderia-promover-o-bem-dissertativa-quatro-partes">Exercício
+5 — Como a IA poderia promover o bem?
+<code>[dissertativa · quatro partes]</code></h2>
+<p><strong>Pontuação:</strong> 2 pontos · <strong>Extensão:</strong> 75
+a 1000 palavras por item · <strong>Tentativas:</strong> ilimitadas
+<strong>Componente Open edX:</strong> <code>openassessment</code> com
+quatro campos de resposta</p>
+<p>Segundo o AI4People, a IA poderia oferecer “quatro grandes
+oportunidades para a sociedade” se for desenvolvida de modo a respeitar
+a dignidade humana. Nesta tarefa, seu trabalho é descobrir como essas
+oportunidades poderiam ser alcançadas na prática.</p>
+<h3 id="autorrealização">1. Autorrealização</h3>
+<p>Significa a capacidade das pessoas de florescer em termos de seus
+próprios projetos de vida, interesses, potencialidades e habilidades.
+Segundo o AI4People, isso pode ser alcançado se a automação
+“inteligente” for usada para libertar as pessoas do trabalho rotineiro.
+Contudo, o risco nesse caso é o ritmo do desenvolvimento tecnológico e a
+possível distribuição desigual dos custos e benefícios resultantes. Uma
+desvalorização muito rápida pode, por exemplo, levar a uma ruptura
+acelerada do mercado de trabalho, mudando a natureza do emprego e
+causando sério dano econômico.</p>
+<blockquote>
+<p><strong>Na prática, como a automação inteligente poderia ser usada de
+modo a libertar as pessoas do trabalho rotineiro? Forneça dois exemplos
+concretos, com breve explicação de como, exatamente, a automação liberta
+as pessoas.</strong></p>
+</blockquote>
+<h3 id="ampliação-da-agência-humana">2. Ampliação da agência humana</h3>
+<p>A IA pode fornecer um reservatório crescente de “agência
+inteligente”, o que significa que pode ampliar a inteligência humana e
+nos dar enorme apoio cognitivo. Isso, porém, exige uma compreensão clara
+de responsabilidade: que tipo de IA desenvolvemos, como a usamos e se
+compartilhamos suas vantagens e benefícios com todos.</p>
+<blockquote>
+<p><strong>De que maneiras a IA pode ampliar a inteligência humana ou
+apoiar nosso pensamento? Forneça dois exemplos e explique como a IA nos
+ajuda a pensar.</strong></p>
+</blockquote>
+<h3 id="desenvolvimento-de-capacidades">3. Desenvolvimento de
+capacidades</h3>
+<p>A IA oferece oportunidades para desenvolver as capacidades dos
+indivíduos e da sociedade em geral. O uso de tecnologias de IA apresenta
+inúmeras possibilidades de “reinventar” a sociedade, ampliando
+radicalmente aquilo de que os humanos são coletivamente capazes. Mais IA
+pode apoiar melhor coordenação e, portanto, objetivos mais ambiciosos.
+Contudo, se recorrermos ao uso de tecnologias de IA para ampliar nossas
+próprias capacidades da maneira errada, podemos delegar tarefas
+importantes — e, sobretudo, decisões — a sistemas autônomos que deveriam
+permanecer ao menos parcialmente sujeitos à supervisão e à escolha
+humanas.</p>
+<blockquote>
+<p><strong>Como a IA poderia melhorar a coordenação coletiva das
+sociedades no futuro? Forneça um exemplo e explique
+brevemente.</strong></p>
+</blockquote>
+<h3 id="cultivo-da-coesão-social">4. Cultivo da coesão social</h3>
+<p>Muitos problemas globais — mudança climática, pobreza — exigem
+coordenação complexa. Por exemplo, os esforços para enfrentar a mudança
+climática expuseram o desafio de criar uma resposta coesa, tanto dentro
+das sociedades quanto entre elas. A IA, com suas soluções intensivas em
+dados e movidas por algoritmos, pode ajudar enormemente a lidar com essa
+complexidade de coordenação, apoiando mais coesão e colaboração sociais.
+Ainda assim, o risco é que o poder computacional e preditivo da IA deve
+ser usado para encorajar a autodeterminação humana e fomentar a coesão
+social, não para minar a dignidade ou o florescimento humano.</p>
+<blockquote>
+<p><strong>Como a IA poderia nos ajudar a colaborar melhor e a lidar com
+problemas como mudança climática ou pobreza? Forneça dois exemplos
+concretos e explique brevemente.</strong></p>
+</blockquote>
+<hr />
+<h2 id="avaliação-do-capítulo-pesquisa">Avaliação do capítulo
+<code>[pesquisa]</code></h2>
+<p><strong>Pontuação:</strong> 1 ponto · <strong>Tentativas:</strong>
+ilimitadas</p>
+<ul>
+<li><strong>Utilidade deste capítulo</strong> — nota de 1 a 5</li>
+<li><strong>Clareza deste capítulo</strong> — nota de 1 a 5</li>
+<li><strong>Dificuldade deste capítulo</strong> — nota de 1 a 5</li>
+<li><strong>Outros comentários</strong> — até 600 palavras</li>
+</ul>
+<hr />
+<div class="licenca">
+<p><strong>Material original:</strong> <em>Ethics of AI</em>,
+Universidade de Helsinque. Professores responsáveis: Anna-Mari Rusanen e
+Jukka K. Nurminen. <a href="https://ethics-of-ai.mooc.fi/" class="uri">https://ethics-of-ai.mooc.fi/</a>. <strong>Esta
+versão:</strong> tradução por José Lucas Lira Bizil, Fernando Mazzeto
+Lisboa Lima e Matheus da Silva Fernandes, Programa CiberExt 26-29
+(FEELT38103), UFU, 2026. Obra derivada. <strong>Licença:</strong> CC
+BY-NC-SA 4.0.</p>
+</div>
+</body>
+</html>
